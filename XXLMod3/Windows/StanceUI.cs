@@ -473,6 +473,12 @@ namespace XXLMod3.Windows
                 Quaternion tempRightRot = StanceController.Instance.ActiveRightFootRotTarget.transform.localRotation;
                 StanceController.Instance.ActiveLeftFootRotTarget.transform.localRotation = new Quaternion(-tempRightRot.x, -tempRightRot.y, tempRightRot.z, tempRightRot.w);
                 StanceController.Instance.ActiveRightFootRotTarget.transform.localRotation = new Quaternion(-tempLeftRot.x, -tempLeftRot.y, tempLeftRot.z, tempLeftRot.w);
+
+                Quaternion tempLeftToeRot = StanceController.Instance.ActiveLeftToeRotTarget.transform.localRotation;
+                Quaternion tempRightToeRot = StanceController.Instance.ActiveRightToeRotTarget.transform.localRotation;
+                StanceController.Instance.ActiveLeftToeRotTarget.transform.localRotation = new Quaternion(-tempRightToeRot.x, -tempRightToeRot.y, tempRightToeRot.z, tempRightToeRot.w);
+                StanceController.Instance.ActiveRightToeRotTarget.transform.localRotation = new Quaternion(-tempLeftToeRot.x, -tempLeftToeRot.y, tempLeftToeRot.z, tempLeftToeRot.w);
+
                 StanceController.Instance.SaveFootPositionRotation();
             }
             if(GUILayout.Button("<b>Reset Pos</b>", GUILayout.Height(21f)))
