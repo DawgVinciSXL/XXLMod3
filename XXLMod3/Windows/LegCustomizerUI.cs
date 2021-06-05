@@ -22,7 +22,25 @@ namespace XXLMod3.Windows
             Steeze
         }
 
+        public enum FlipLegs
+        {
+            Ollie,
+            Nollie,
+            Switch,
+            Fakie
+        }
+
+        public enum SteezeLegs
+        {
+            Ollie,
+            Nollie,
+            Switch,
+            Fakie
+        }
+
+        public static FlipLegs FlipTab = FlipLegs.Ollie;
         public static LegTab LegTabs = LegTab.Steeze;
+        public static SteezeLegs SteezeTab = SteezeLegs.Ollie;
         private static string PresetName = "Enter Name...";
 
         public static void Window(int windowID)
@@ -39,10 +57,10 @@ namespace XXLMod3.Windows
             switch (LegTabs)
             {
                 case LegTab.Flip:
-                    FlipLegs();
+                    FlipLegsTab();
                     break;
                 case LegTab.Steeze:
-                    SteezeLegs();
+                    SteezeLegsTab();
                     break;
             }
         }
@@ -94,27 +112,29 @@ namespace XXLMod3.Windows
             GUILayout.EndHorizontal();
         } 
 
-        public static void FlipLegs()
+        public static void FlipLegsTab()
         {
             GUILayout.BeginVertical("Box");
-            if (RGUI.Button(Main.settings.FlipLegs.Active, "Flip Legs"))
-            {
-                Main.settings.FlipLegs.Active = !Main.settings.FlipLegs.Active;
-            }
-
-            DoLegSettings(Main.settings.FlipLegs);
+            FlipTab = RGUI.Field(FlipTab, "Select PopType");
+            DrawLegSettings(GetCurrentFlipLegs());
             GUILayout.EndVertical();
         }
 
-        public static void SteezeLegs()
+        public static void SteezeLegsTab()
         {
             GUILayout.BeginVertical("Box");
-            if (RGUI.Button(Main.settings.SteezeLegs.Active, "Steeze Legs"))
-            {
-                Main.settings.SteezeLegs.Active = !Main.settings.SteezeLegs.Active;
-            }
-            DoLegSettings(Main.settings.SteezeLegs);
+            SteezeTab = RGUI.Field(SteezeTab, "Select PopType");
+            DrawLegSettings(GetCurrentSteezeLegs());
             GUILayout.EndVertical();
+        }
+
+        public static void DrawLegSettings(CustomLegSettings legSettings)
+        {
+            if (RGUI.Button(legSettings.Active, "Steeze Legs"))
+            {
+                legSettings.Active = !legSettings.Active;
+            }
+            DoLegSettings(legSettings);
         }
 
         private static void SaveSettings(string fileName, BaseLegSettings Settings)
@@ -156,11 +176,45 @@ namespace XXLMod3.Windows
             switch (LegTabs)
             {
                 case LegTab.Flip:
-                    return Main.settings.FlipLegs;
+                    return Main.settings.OllieFlipLegs;
                 case LegTab.Steeze:
-                    return Main.settings.SteezeLegs;
+                    return Main.settings.OllieSteezeLegs;
                 default:
-                    return Main.settings.SteezeLegs;
+                    return Main.settings.OllieSteezeLegs;
+            }
+        }
+
+        public static CustomLegSettings GetCurrentSteezeLegs()
+        {
+            switch (SteezeTab)
+            {
+                case SteezeLegs.Ollie:
+                    return Main.settings.OllieSteezeLegs;
+                case SteezeLegs.Nollie:
+                    return Main.settings.NollieSteezeLegs;
+                case SteezeLegs.Switch:
+                    return Main.settings.SwitchSteezeLegs;
+                case SteezeLegs.Fakie:
+                    return Main.settings.FakieSteezeLegs;
+                default:
+                    return Main.settings.OllieSteezeLegs;
+            }
+        }
+
+        public static CustomLegSettings GetCurrentFlipLegs()
+        {
+            switch (FlipTab)
+            {
+                case FlipLegs.Ollie:
+                    return Main.settings.OllieFlipLegs;
+                case FlipLegs.Nollie:
+                    return Main.settings.NollieFlipLegs;
+                case FlipLegs.Switch:
+                    return Main.settings.SwitchFlipLegs;
+                case FlipLegs.Fakie:
+                    return Main.settings.FakieFlipLegs;
+                default:
+                    return Main.settings.OllieFlipLegs;
             }
         }
 

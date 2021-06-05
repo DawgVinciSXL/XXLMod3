@@ -709,7 +709,7 @@ namespace XXLMod3.PlayerStates
             PlayerController.Instance.SetSkaterToMaster();
             Vector3 force = PlayerController.Instance.skaterController.PredictLandingLight(PlayerController.Instance.skaterController.skaterRigidbody.velocity, 0.2f);
             PlayerController.Instance.skaterController.skaterRigidbody.AddForce(force, ForceMode.Impulse);
-            PopType popType = PlayerController.Instance.IsSwitch ? (_manual ? PopType.Ollie : PopType.Nollie) : (_manual ? PopType.Switch : PopType.Fakie);
+            SkaterXL.Core.PopType popType = PlayerController.Instance.IsSwitch ? (_manual ? SkaterXL.Core.PopType.Ollie : SkaterXL.Core.PopType.Nollie) : (_manual ? SkaterXL.Core.PopType.Switch : SkaterXL.Core.PopType.Fakie);
             EventManager.Instance.EnterAir(popType, 0f);
             object[] args = new object[]
             {

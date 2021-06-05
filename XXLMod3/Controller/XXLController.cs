@@ -29,6 +29,8 @@ namespace XXLMod3.Controller
         public static PhysicMaterial PrimoPhysicsMaterial;
         public static ManualStance ManualType;
 
+        public static Core.PopType PopType;
+
         public static Transform LeftFoot;
         public static Transform RightFoot;
 

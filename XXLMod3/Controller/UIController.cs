@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEngine;
@@ -214,7 +213,7 @@ namespace XXLMod3.Controller
                         TabMenuRect = GUI.Window(9001, new Rect(TabMenuRect.position, new Vector2(614f, 225f)), FixUI.Window, "<b>XXLMOD3</b>");
                         break;
                     case MenuTab.LegCustomizer:
-                        TabMenuRect = GUI.Window(9001, new Rect(TabMenuRect.position, new Vector2(444f, 350f)), LegCustomizer.Window, "<b>XXLMOD3</b>");
+                        TabMenuRect = GUI.Window(9001, new Rect(TabMenuRect.position, new Vector2(444f, 375f)), LegCustomizer.Window, "<b>XXLMOD3</b>");
                         break;
                 }
             }

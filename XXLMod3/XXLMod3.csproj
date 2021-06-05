@@ -148,6 +148,7 @@
     <Compile Include="Core\Enums\GrabStanceTab.cs" />
     <Compile Include="Core\Enums\GrindStanceTab.cs" />
     <Compile Include="Core\Enums\ManualStance.cs" />
+    <Compile Include="Core\Enums\PopType.cs" />
     <Compile Include="Core\Enums\PresetTab.cs" />
     <Compile Include="Core\Enums\StanceTab.cs" />
     <Compile Include="Core\Grinds\BaseGrindSettings.cs" />

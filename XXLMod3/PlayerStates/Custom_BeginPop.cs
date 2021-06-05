@@ -234,25 +234,29 @@ namespace XXLMod3.PlayerStates
             {
                 flag = PlayerController.Instance.IsSwitch;
             }
-            PopType popType;
+            SkaterXL.Core.PopType popType;
             if (!flag)
             {
                 if (!_forwardLoad)
                 {
-                    popType = PopType.Ollie;
+                    popType = SkaterXL.Core.PopType.Ollie;
+                    XXLController.PopType = Core.PopType.Ollie;
                 }
                 else
                 {
-                    popType = PopType.Nollie;
+                    popType = SkaterXL.Core.PopType.Nollie;
+                    XXLController.PopType = Core.PopType.Nollie;
                 }
             }
             else if (!_forwardLoad)
             {
-                popType = PopType.Fakie;
+                popType = SkaterXL.Core.PopType.Fakie;
+                XXLController.PopType = Core.PopType.Fakie;
             }
             else
             {
-                popType = PopType.Switch;
+                popType = SkaterXL.Core.PopType.Switch;
+                XXLController.PopType = Core.PopType.Switch;
             }
             PlayerController.Instance.skaterController.rightFootCollider.isTrigger = true;
             PlayerController.Instance.skaterController.leftFootCollider.isTrigger = true;
