@@ -1,0 +1,30 @@
+﻿namespace XXLMod3.Core
+{
+    public enum StanceTab
+    {
+        Catch,
+        Grabs,
+        GrabsOnButton,
+        Grinding,
+        InAir,
+        Manual,
+        ManualSwitch,
+        NoseManual,
+        NoseManualSwitch,
+        Powerslide,
+        Primo,
+        PrimoSetup,
+        PrimoSetupNollie,
+        Pushing,
+        PushingMongo,
+        PushingSwich,
+        PushingSwitchMongo,
+        Riding,
+        RidingSwitch,
+        Setup,
+        SetupNollie,
+        SetupSwitch,
+        SetupFakie,
+        OnButton
+    }
+}

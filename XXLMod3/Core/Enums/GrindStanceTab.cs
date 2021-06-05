@@ -1,0 +1,40 @@
+﻿namespace XXLMod3.Core
+{
+    public enum GrindStanceTab
+    {
+        BSBluntslide,
+        FSBluntslide,
+        BSBoardslide,
+        FSBoardslide,
+        BSCrook,
+        FSCrook,
+        BSFeeble,
+        FSFeeble,
+        BSFiftyFifty,
+        FSFiftyFifty,
+        BSFiveO,
+        FSFiveO,
+        BSLipslide,
+        FSLipslide,
+        BSLosi,
+        FSLosi,
+        BSNoseblunt,
+        FSNoseblunt,
+        BSNosegrind,
+        FSNosegrind,
+        BSNoseslide,
+        FSNoseslide,
+        BSOvercrook,
+        FSOvercrook,
+        BSSalad,
+        FSSalad,
+        BSSmith,
+        FSSmith,
+        BSSuski,
+        FSSuski,
+        BSTailslide,
+        FSTailslide,
+        BSWilly,
+        FSWilly
+    }
+}
