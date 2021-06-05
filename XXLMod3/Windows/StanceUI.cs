@@ -462,6 +462,19 @@ namespace XXLMod3.Windows
                 GUILayout.Box("", GUILayout.Height(21f));
             }
             GUILayout.BeginHorizontal("Box");
+            if (GUILayout.Button("<b>Flip</b>", GUILayout.Height(21f)))
+            {
+                Vector3 tempLeftPos = StanceController.Instance.ActiveLeftFootTarget.transform.localPosition;
+                Vector3 tempRightPos = StanceController.Instance.ActiveRightFootTarget.transform.localPosition;
+                StanceController.Instance.ActiveLeftFootTarget.transform.localPosition = new Vector3(-tempRightPos.x,tempRightPos.y,tempRightPos.z);
+                StanceController.Instance.ActiveRightFootTarget.transform.localPosition = new Vector3(-tempLeftPos.x, tempLeftPos.y, tempLeftPos.z);
+
+                Quaternion tempLeftRot = StanceController.Instance.ActiveLeftFootRotTarget.transform.localRotation;
+                Quaternion tempRightRot = StanceController.Instance.ActiveRightFootRotTarget.transform.localRotation;
+                StanceController.Instance.ActiveLeftFootRotTarget.transform.localRotation = new Quaternion(-tempRightRot.x, -tempRightRot.y, tempRightRot.z, tempRightRot.w);
+                StanceController.Instance.ActiveRightFootRotTarget.transform.localRotation = new Quaternion(-tempLeftRot.x, -tempLeftRot.y, tempLeftRot.z, tempLeftRot.w);
+                StanceController.Instance.SaveFootPositionRotation();
+            }
             if(GUILayout.Button("<b>Reset Pos</b>", GUILayout.Height(21f)))
             {
                 StanceController.Instance.ActiveLeftFootTarget.transform.localPosition = StanceController.Instance.DefaultStanceSettings.lfPos;
