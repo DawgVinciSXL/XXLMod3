@@ -39,7 +39,7 @@ namespace XXLMod3.Patches.IKController_
                 case PopType.Fakie:
                     return Main.settings.FakieFlipLegs;
                 default:
-                    return Main.settings.OllieFlipLegs;
+                    return Main.settings.DefaultFlipLegs;
             }
         }
     }

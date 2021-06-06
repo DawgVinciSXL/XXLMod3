@@ -12,7 +12,7 @@ namespace XXLMod3.Patches.IKController_
         {
             if (Main.enabled)
             {
-                if (PlayerController.Instance.currentStateEnum == PlayerController.CurrentState.Release || PlayerController.Instance.currentStateEnum == PlayerController.CurrentState.Pop)
+                if (PlayerController.Instance.currentStateEnum == PlayerController.CurrentState.Release)
                 {
                     if (GetCustomLegs().Active)
                     {
@@ -39,7 +39,6 @@ namespace XXLMod3.Patches.IKController_
                         ____skaterLeftFootPos = Vector3.Lerp(___skaterLeftFootTarget.position, lfPos, ____leftSteezeWeight);
                         ____skaterLeftFootRot = Quaternion.Slerp(___skaterLeftFootTarget.rotation, ___steezeLeftFootTarget.rotation, ____leftSteezeWeight);
 
-
                         ____skaterRightFootPos = Vector3.Lerp(___skaterRightFootTarget.position, rfPos, ____rightSteezeWeight);
                         ____skaterRightFootRot = Quaternion.Slerp(___skaterRightFootTarget.rotation, ___steezeRightFootTarget.rotation, ____rightSteezeWeight);
                         return false;
@@ -64,7 +63,7 @@ namespace XXLMod3.Patches.IKController_
                 case PopType.Fakie:
                     return Main.settings.FakieSteezeLegs;
                 default:
-                    return Main.settings.OllieSteezeLegs;
+                    return Main.settings.DefaultSteezeLegs;
             }
         }
     }

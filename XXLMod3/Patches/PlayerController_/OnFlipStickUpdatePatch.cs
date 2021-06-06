@@ -41,6 +41,7 @@ namespace XXLMod3.Patches.PlayerController_
                 {
                     float p_value = (p_flip == 0f) ? 0f : ((p_flip > 0f) ? 1f : -1f);
                     PlayerController.Instance.AnimSetFlip(p_value);
+                    //GetFlipDirection(p_value);
                     PlayerController.Instance.animationController.ScaleAnimSpeed(GetAnimationSpeed());
                     PlayerController.Instance.AnimRelease(true);
                     if (PlayerController.Instance.playerSM.PoppedSM())
@@ -93,6 +94,26 @@ namespace XXLMod3.Patches.PlayerController_
                 return Main.settings.PrimoFlipAnimationSpeed;
             }
             return Main.settings.FlipAnimationSpeed;
+        }
+
+        private static void GetFlipDirection(float flipDir)
+        {
+            if(flipDir > 0.1f)
+            {
+                if(SettingsManager.Instance.stance == SkaterXL.Core.Stance.Regular)
+                {
+                    UnityModManagerNet.UnityModManager.Logger.Log("Kickflip");
+                    return;
+                }
+                UnityModManagerNet.UnityModManager.Logger.Log("Heelflip");
+                return;
+            }
+            if (SettingsManager.Instance.stance == SkaterXL.Core.Stance.Regular)
+            {
+                UnityModManagerNet.UnityModManager.Logger.Log("Heelflip");
+                return;
+            }
+            UnityModManagerNet.UnityModManager.Logger.Log("Kickflip");
         }
     }
 }
