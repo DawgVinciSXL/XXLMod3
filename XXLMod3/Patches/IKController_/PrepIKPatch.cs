@@ -1,4 +1,5 @@
 ﻿using HarmonyLib;
+using SkaterXL.Core;
 using UnityEngine;
 using XXLMod3.Controller;
 
@@ -15,8 +16,8 @@ namespace XXLMod3.Patches.IKController_
                 ___ikRightFootPosition.position = ___ikAnimRightFootTarget.position;
                 ___ikLeftFootPosition.position = ___ikAnimLeftFootTarget.position;
                 ___ikRightFootPosition.position = ___ikAnimRightFootTarget.position;
-                ____leftPos = Vector3.Lerp((SettingsManager.Instance.stance == SkaterXL.Core.Stance.Regular) ? StanceController.LeftFootIndicator == null ? ___ikLeftFootPositionOffset.position : StanceController.LeftFootIndicator.transform.position : StanceController.LeftFootIndicator == null ? ___ikLeftFootPositionOffsetGoofy.position : StanceController.LeftFootIndicator.transform.position, ____skaterLeftFootPos, ____ikLeftPosLerp);
-                ____rightPos = Vector3.Lerp((SettingsManager.Instance.stance == SkaterXL.Core.Stance.Regular) ? StanceController.LeftFootIndicator == null ? ___ikRightFootPositionOffset.position : StanceController.RightFootIndicator.transform.position : StanceController.RightFootIndicator == null ? ___ikRightFootPositionOffsetGoofy.position : StanceController.RightFootIndicator.transform.position, ____skaterRightFootPos, ____ikRightPosLerp);
+                ____leftPos = Vector3.Lerp((SettingsManager.Instance.stance == Stance.Regular) ? StanceController.LeftFootIndicator == null ? ___ikLeftFootPositionOffset.position : StanceController.LeftFootIndicator.transform.position : StanceController.LeftFootIndicator == null ? ___ikLeftFootPositionOffsetGoofy.position : StanceController.LeftFootIndicator.transform.position, ____skaterLeftFootPos, ____ikLeftPosLerp);
+                ____rightPos = Vector3.Lerp((SettingsManager.Instance.stance == Stance.Regular) ? StanceController.LeftFootIndicator == null ? ___ikRightFootPositionOffset.position : StanceController.RightFootIndicator.transform.position : StanceController.RightFootIndicator == null ? ___ikRightFootPositionOffsetGoofy.position : StanceController.RightFootIndicator.transform.position, ____skaterRightFootPos, ____ikRightPosLerp);
                 ____finalLeftPos = ____leftPos;
                 ____finalRightPos = ____rightPos;
                 if ((___rightHip.position - ____rightPos).magnitude > 0.7f)
