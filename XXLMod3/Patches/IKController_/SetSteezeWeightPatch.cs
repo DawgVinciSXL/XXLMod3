@@ -12,7 +12,7 @@ namespace XXLMod3.Patches.IKController_
         {
             if (Main.enabled)
             {
-                if (PlayerController.Instance.currentStateEnum == PlayerController.CurrentState.Release)
+                if (PlayerController.Instance.currentStateEnum == PlayerController.CurrentState.Release || PlayerController.Instance.currentStateEnum == PlayerController.CurrentState.Pop)
                 {
                     if (GetCustomLegs().Active)
                     {
