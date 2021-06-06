@@ -52,9 +52,9 @@ namespace XXLMod3.Controller
 
         public List<BaseGrindSettings> GrindSettingObjects;
 
-        private void Awake() => Instance = this;
-
         public FullBodyBipedIK bipedIK;
+
+        private void Awake() => Instance = this;
 
         private void Start()
         {
