@@ -6,6 +6,7 @@ using System.Reflection;
 
 namespace XXLMod3.Patches.LevelManager_
 {
+    //Code & permission by Mcbtay
     public class LevelManagerPatch
     {
         [HarmonyPatch(typeof(LevelManager), nameof(LevelManager.LoadLevelScene))]
