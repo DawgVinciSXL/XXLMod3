@@ -534,7 +534,7 @@ namespace XXLMod3.Windows
             if (GUILayout.Button("<b>Save Stance</b>", GUILayout.Height(21f), GUILayout.Width(120f)))
             {
                 StanceController.Instance.SaveFootPositionRotation();
-                SaveStanceSettings(presetPath + presetName, GetCurrentStance());
+                SaveStanceSettings(PresetHelper.StancePresetsPath + presetName, GetCurrentStance());
                 PresetHelper.GetPresets();
                 UISounds.Instance.PlayOneShotSelectMajor();
                 MessageSystem.QueueMessage(MessageDisplayData.Type.Success, $"Preset: {presetName} successfully saved!", 2f);
