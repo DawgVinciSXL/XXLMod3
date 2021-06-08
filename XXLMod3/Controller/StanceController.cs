@@ -54,13 +54,6 @@ namespace XXLMod3.Controller
 
         private bool IsInitialized = false;
 
-        private string[] CurrentPresets = null;
-        private string[] DefaultPresets = null;
-        private string[] OnButtonPresets = null;
-
-        private Vector2 scrollPos;
-        private Vector2 scrollPos2;
-
         public CustomStanceSettings DefaultStanceSettings = new CustomStanceSettings(true, 1f, 100f, 1f, 100f, Quaternion.identity, Quaternion.identity, Vector3.zero, Vector3.zero, Quaternion.identity, Quaternion.identity);
         public CustomFeetObject DefaultFeet = new CustomFeetObject();
         private CustomFeetObject RidingFeet = new CustomFeetObject();

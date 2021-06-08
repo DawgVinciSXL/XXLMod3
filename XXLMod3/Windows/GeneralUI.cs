@@ -87,8 +87,8 @@ namespace XXLMod3.Windows
             if (GUILayout.Button("<b>Save Stats</b>", GUILayout.Height(21f), GUILayout.ExpandWidth(false)))
             {
                 StanceController.Instance.SaveFootPositionRotation();
-                SaveStats.Save<Settings>(Main.settings, Main.modEntry, UIController.Instance.StatsPresetPath + StatsPresetName + ".xml");
-                UIController.Instance.GetPresetsFromFolder();
+                SaveStats.Save<Settings>(Main.settings, Main.modEntry, PresetHelper.StatsPresetsPath + StatsPresetName + ".xml");
+                PresetHelper.GetPresets();
                 UISounds.Instance.PlayOneShotSelectMajor();
                 MessageSystem.QueueMessage(MessageDisplayData.Type.Success, $"Preset: {StatsPresetName} successfully saved!", 2f);
             }

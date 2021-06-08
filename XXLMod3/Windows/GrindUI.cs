@@ -12,7 +12,6 @@ namespace XXLMod3.Windows
     public class GrindSettings
     {
         private static string presetName = "Enter name...";
-        public static string presetPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\SkaterXL\\XXLMod3\\GrindPresets\\";
         public static bool showMenu;
         public static Rect rect = new Rect(1, 1, 100, 100);
 
@@ -286,8 +285,8 @@ namespace XXLMod3.Windows
             presetName = GUILayout.TextField(presetName, GUILayout.Height(21f));
             if (GUILayout.Button("<b>Save Settings</b>", GUILayout.Height(21f), GUILayout.Width(120f)))
             {
-                SaveSettings(presetPath + presetName, GrindSettings);
-                UIController.Instance.GetPresetsFromFolder();
+                SaveSettings(PresetHelper.GrindPresetsPath + presetName, GrindSettings);
+                PresetHelper.GetPresets();
                 UISounds.Instance.PlayOneShotSelectMajor();
                 MessageSystem.QueueMessage(MessageDisplayData.Type.Success, $"Preset: {presetName} successfully saved!", 2f);
 
@@ -399,7 +398,7 @@ namespace XXLMod3.Windows
             GUILayout.Label("<b>GRIND SETTINGS</b>", GUILayout.Height(21f));
             if (GUILayout.Button("<b>X</b>", GUILayout.Height(19f), GUILayout.Width(32f)))
             {
-                UIController.Instance.MenuTab = Core.MenuTab.Off;
+                UIController.Instance.MenuTab = MenuTab.Off;
             }
             GUILayout.EndHorizontal();
         }

@@ -18,12 +18,6 @@ namespace XXLMod3.Controller
         private GUIStyle windowStyle;
         private Texture2D windowTex;
 
-        public string[] GrindPresets;
-        public string[] LegPresets;
-        public string[] StatsPresets;
-
-        public string StatsPresetPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\SkaterXL\\XXLMod3\\StatsPresets\\";
-
         public MenuTab MenuTab = MenuTab.Off;
 
         private void Awake() => Instance = this;
@@ -32,42 +26,6 @@ namespace XXLMod3.Controller
         {
             MainMenuRect = new Rect(20f, Screen.currentResolution.height / 2 - 370.5f, 100f, 200f);
             TabMenuRect = new Rect(200f, Screen.currentResolution.height / 2 - 370.5f, 100f, 200f);
-
-            CreateFolder();
-            GetPresetsFromFolder();
-        }
-
-        private void CreateFolder()
-        {
-            if (!Directory.Exists(GrindSettings.presetPath))
-            {
-                Directory.CreateDirectory(GrindSettings.presetPath);
-            }
-
-            if (!Directory.Exists(LegCustomizer.PresetPath))
-            {
-                Directory.CreateDirectory(LegCustomizer.PresetPath);
-            }
-
-            if (!Directory.Exists(StatsPresetPath))
-            {
-                Directory.CreateDirectory(StatsPresetPath);
-            }
-        }
-
-        public void GetPresetsFromFolder()
-        {
-            GrindPresets = (from file in Directory.EnumerateFiles(Path.Combine(GrindSettings.presetPath), "*.json", SearchOption.AllDirectories)
-                            where file.Contains(".json")
-                             select file).ToArray<string>();
-
-            LegPresets = (from file in Directory.EnumerateFiles(Path.Combine(LegCustomizer.PresetPath), "*.json", SearchOption.AllDirectories)
-                            where file.Contains(".json")
-                            select file).ToArray<string>();
-
-            StatsPresets = (from file in Directory.EnumerateFiles(Path.Combine(StatsPresetPath), "*.xml", SearchOption.AllDirectories)
-                            where file.Contains(".xml")
-                            select file).ToArray<string>();
         }
 
         private void Update()

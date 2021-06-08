@@ -218,7 +218,6 @@ namespace XXLMod3
         public CustomLegSettings NollieFlipLegs = new CustomLegSettings(false, 0f, 0f, 0f, 0f, 0f, 0f);
         public CustomLegSettings SwitchFlipLegs = new CustomLegSettings(false, 0f, 0f, 0f, 0f, 0f, 0f);
         public CustomLegSettings FakieFlipLegs = new CustomLegSettings(false, 0f, 0f, 0f, 0f, 0f, 0f);
-        public CustomLegSettings GrabLegs = new CustomLegSettings(false, 0f, 0f, 0f, 0f, 0f, 0f);
         public CustomLegSettings DefaultSteezeLegs = new CustomLegSettings(false, 0f, 0f, 0f, 0f, 0f, 0f);
         public CustomLegSettings OllieSteezeLegs = new CustomLegSettings(false, 0f, 0f, 0f, 0f, 0f, 0f);
         public CustomLegSettings NollieSteezeLegs = new CustomLegSettings(false, 0f, 0f, 0f, 0f, 0f, 0f);

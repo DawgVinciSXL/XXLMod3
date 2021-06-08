@@ -48,37 +48,37 @@ namespace XXLMod3.Windows
 
         private static void DrawStatPresets()
         {
-            bool flag2 = UIController.Instance.StatsPresets == null;
+            bool flag2 = PresetHelper.StatsPresets == null;
             if (flag2)
             {
-                UIController.Instance.GetPresetsFromFolder();
+                PresetHelper.GetPresets();
             }
 
-            if (UIController.Instance.StatsPresets.Length >= 1)
+            if (PresetHelper.StatsPresets.Length >= 1)
             {
                 GUILayout.BeginVertical("Box");
-                float num3 = (float)Mathf.Min(208, UIController.Instance.StatsPresets.Length * (200 + 2 * 2) + 2 * 2);
+                float num3 = (float)Mathf.Min(208, PresetHelper.StatsPresets.Length * (200 + 2 * 2) + 2 * 2);
                 statsScrollPos = GUILayout.BeginScrollView(statsScrollPos, new GUILayoutOption[]
                 {
                     GUILayout.Height(num3),
                     GUILayout.ExpandHeight(true)
                 });
                 GUILayout.BeginVertical();
-                for (int i = 0; i < UIController.Instance.StatsPresets.Length; i++)
+                for (int i = 0; i < PresetHelper.StatsPresets.Length; i++)
                 {
                     GUILayout.BeginHorizontal();
-                    string presetName = Path.GetFileNameWithoutExtension(UIController.Instance.StatsPresets[i]);
+                    string presetName = Path.GetFileNameWithoutExtension(PresetHelper.StatsPresets[i]);
                     bool flag7 = GUILayout.Button("<b>" + presetName + "</b>", GUILayout.Height(21));
                     if (flag7)
                     {
-                        Main.settings = Core.SaveStats.Load<Settings>(Main.modEntry, UIController.Instance.StatsPresetPath + presetName + ".xml");
+                        Main.settings = Core.SaveStats.Load<Settings>(Main.modEntry, PresetHelper.StatsPresetsPath + presetName + ".xml");
                         StanceController.Instance.Initialize();
                     }
                     bool flag8 = GUILayout.Button("<b>X</b>", GUILayout.Height(21f), GUILayout.Width(30f));
                     if (flag8)
                     {
-                        DeletePreset(UIController.Instance.StatsPresetPath + presetName + ".xml");
-                        UIController.Instance.GetPresetsFromFolder();
+                        DeletePreset(PresetHelper.StatsPresetsPath + presetName + ".xml");
+                        PresetHelper.GetPresets();
                     }
                     GUILayout.EndHorizontal();
                 }
@@ -96,8 +96,8 @@ namespace XXLMod3.Windows
             if (GUILayout.Button("<b>Save Settings</b>", GUILayout.Height(21f), GUILayout.Width(120f)))
             {
                 StanceController.Instance.SaveFootPositionRotation();
-                Core.SaveStats.Save<Settings>(Main.settings, Main.modEntry, UIController.Instance.StatsPresetPath + StatsPresetName+ ".xml");
-                UIController.Instance.GetPresetsFromFolder();
+                Core.SaveStats.Save<Settings>(Main.settings, Main.modEntry, PresetHelper.StatsPresetsPath + StatsPresetName+ ".xml");
+                PresetHelper.GetPresets();
                 UISounds.Instance.PlayOneShotSelectMajor();
                 MessageSystem.QueueMessage(MessageDisplayData.Type.Success, $"Preset: {StatsPresetName} successfully saved!", 2f);
             }
@@ -106,36 +106,36 @@ namespace XXLMod3.Windows
 
         private static void DrawGrindPresets()
         {
-            bool flag2 = UIController.Instance.GrindPresets == null;
+            bool flag2 = PresetHelper.GrindPresets == null;
             if (flag2)
             {
-                UIController.Instance.GetPresetsFromFolder();
+                PresetHelper.GetPresets();
             }
 
-            if (UIController.Instance.GrindPresets.Length >= 1)
+            if (PresetHelper.GrindPresets.Length >= 1)
             {
                 GUILayout.BeginVertical("Box");
-                float num3 = (float)Mathf.Min(208, UIController.Instance.GrindPresets.Length * (200 + 2 * 2) + 2 * 2);
+                float num3 = (float)Mathf.Min(208, PresetHelper.GrindPresets.Length * (200 + 2 * 2) + 2 * 2);
                 grindScrollPos = GUILayout.BeginScrollView(grindScrollPos, new GUILayoutOption[]
                 {
                     GUILayout.Height(num3),
                     GUILayout.ExpandHeight(true)
                 });
                 GUILayout.BeginVertical();
-                for (int i = 0; i < UIController.Instance.GrindPresets.Length; i++)
+                for (int i = 0; i < PresetHelper.GrindPresets.Length; i++)
                 {
                     GUILayout.BeginHorizontal();
-                    string presetName = Path.GetFileNameWithoutExtension(UIController.Instance.GrindPresets[i]);
+                    string presetName = Path.GetFileNameWithoutExtension(PresetHelper.GrindPresets[i]);
                     bool flag7 = GUILayout.Button("<b>" + presetName + "</b>", GUILayout.Height(21));
                     if (flag7)
                     {
-                        GrindSettings.LoadSettings(GrindSettings.presetPath + presetName + ".json");
+                        GrindSettings.LoadSettings(PresetHelper.GrindPresetsPath + presetName + ".json");
                     }
                     bool flag8 = GUILayout.Button("<b>X</b>", GUILayout.Height(21f), GUILayout.Width(30f));
                     if (flag8)
                     {
-                        DeletePreset(GrindSettings.presetPath + presetName + ".json");
-                        UIController.Instance.GetPresetsFromFolder();
+                        DeletePreset(PresetHelper.GrindPresetsPath + presetName + ".json");
+                        PresetHelper.GetPresets();
                     }
                     GUILayout.EndHorizontal();
                 }
@@ -151,36 +151,36 @@ namespace XXLMod3.Windows
 
         private static void DrawLegPresets()
         {
-            bool flag2 = UIController.Instance.LegPresets == null;
+            bool flag2 = PresetHelper.LegPresets == null;
             if (flag2)
             {
-                UIController.Instance.GetPresetsFromFolder();
+                PresetHelper.GetPresets();
             }
 
-            if (UIController.Instance.LegPresets.Length >= 1)
+            if (PresetHelper.LegPresets.Length >= 1)
             {
                 GUILayout.BeginVertical("Box");
-                float num3 = (float)Mathf.Min(208, UIController.Instance.LegPresets.Length * (200 + 2 * 2) + 2 * 2);
+                float num3 = (float)Mathf.Min(208, PresetHelper.LegPresets.Length * (200 + 2 * 2) + 2 * 2);
                 legScrollPos = GUILayout.BeginScrollView(legScrollPos, new GUILayoutOption[]
                 {
                     GUILayout.Height(num3),
                     GUILayout.ExpandHeight(true)
                 });
                 GUILayout.BeginVertical();
-                for (int i = 0; i < UIController.Instance.LegPresets.Length; i++)
+                for (int i = 0; i < PresetHelper.LegPresets.Length; i++)
                 {
                     GUILayout.BeginHorizontal();
-                    string presetName = Path.GetFileNameWithoutExtension(UIController.Instance.LegPresets[i]);
+                    string presetName = Path.GetFileNameWithoutExtension(PresetHelper.LegPresets[i]);
                     bool flag7 = GUILayout.Button("<b>" + presetName + "</b>", GUILayout.Height(21));
                     if (flag7)
                     {
-                        LegCustomizer.LoadSettings(LegCustomizer.PresetPath + presetName + ".json");
+                        LegCustomizer.LoadSettings(PresetHelper.LegPresetsPath + presetName + ".json");
                     }
                     bool flag8 = GUILayout.Button("<b>X</b>", GUILayout.Height(21f), GUILayout.Width(30f));
                     if (flag8)
                     {
-                        DeletePreset(LegCustomizer.PresetPath + presetName + ".json");
-                        UIController.Instance.GetPresetsFromFolder();
+                        DeletePreset(PresetHelper.LegPresetsPath + presetName + ".json");
+                        PresetHelper.GetPresets();
                     }
                     GUILayout.EndHorizontal();
                 }

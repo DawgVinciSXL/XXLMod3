@@ -235,6 +235,7 @@
     <Compile Include="Main.cs" />
     <Compile Include="Patches\PlayerStateMachine_\SetupDefinitionPatch.cs" />
     <Compile Include="Patches\PlayerState_OnBoard_\OnBailedPatch.cs" />
+    <Compile Include="PresetHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RapidGUI\Button.cs" />
     <Compile Include="RapidGUI\Field.cs" />
@@ -289,5 +290,20 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\stancestest.bundle" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Info.json" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>if "$(ConfigurationName)"=="Debug" (
+copy /Y "$(TargetDir)XXLMod3.dll" "C:\Program Files (x86)\Steam\steamapps\common\Skater XL\Mods\XXLMod3\XXLMod3.dll"
+copy /Y "$(ProjectDir)Info.json" "C:\Program Files (x86)\Steam\steamapps\common\Skater XL\Mods\XXLMod3\Info.json"
+)
+
+if "$(ConfigurationName)"=="Release" (
+del /Q /F "C:\Program Files (x86)\Steam\steamapps\common\Skater XL\Mods\XXLMod3\"
+copy /Y "$(TargetDir)XXLMod3.dll" "C:\Program Files (x86)\Steam\steamapps\common\Skater XL\Mods\XXLMod3\XXLMod3.dll"
+copy /Y "$(ProjectDir)Info.json" "C:\Program Files (x86)\Steam\steamapps\common\Skater XL\Mods\XXLMod3\Info.json"
+)</PostBuildEvent>
+  </PropertyGroup>
 </Project>

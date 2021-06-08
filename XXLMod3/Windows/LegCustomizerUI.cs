@@ -1,7 +1,6 @@
 ﻿using ModIO.UI;
 using Newtonsoft.Json;
 using RapidGUI;
-using System;
 using System.IO;
 using UnityEngine;
 using XXLMod3.Controller;
@@ -13,8 +12,6 @@ namespace XXLMod3.Windows
     {
         public static bool showMenu;
         public static Rect rect = new Rect(1, 1, 100, 100);
-
-        public static string PresetPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\SkaterXL\\XXLMod3\\LegPresets\\";
 
         public enum LegTab
         {
@@ -82,8 +79,8 @@ namespace XXLMod3.Windows
             GUI.backgroundColor = Color.green;
             if (GUILayout.Button("<b>Save Legs</b>", GUILayout.Height(21f), GUILayout.ExpandWidth(false)))
             {
-                SaveSettings(PresetPath + PresetName, legs);
-                UIController.Instance.GetPresetsFromFolder();
+                SaveSettings(PresetHelper.LegPresetsPath + PresetName, legs);
+                PresetHelper.GetPresets();
                 UISounds.Instance.PlayOneShotSelectMajor();
                 MessageSystem.QueueMessage(MessageDisplayData.Type.Success, $"Legs: {PresetName} successfully saved!", 2f);
             }
@@ -197,7 +194,7 @@ namespace XXLMod3.Windows
                 case SteezeLegs.Fakie:
                     return Main.settings.FakieSteezeLegs;
                 default:
-                    return Main.settings.OllieSteezeLegs;
+                    return Main.settings.DefaultSteezeLegs;
             }
         }
 
@@ -214,7 +211,7 @@ namespace XXLMod3.Windows
                 case FlipLegs.Fakie:
                     return Main.settings.FakieFlipLegs;
                 default:
-                    return Main.settings.OllieFlipLegs;
+                    return Main.settings.DefaultFlipLegs;
             }
         }
 
@@ -224,7 +221,7 @@ namespace XXLMod3.Windows
             GUILayout.Label("<b>LEG CUSTOMIZER</b>", GUILayout.Height(21f));
             if (GUILayout.Button("<b>X</b>", GUILayout.Height(19f), GUILayout.Width(32f)))
             {
-                UIController.Instance.MenuTab = Core.MenuTab.Off;
+                UIController.Instance.MenuTab = MenuTab.Off;
             }
             GUILayout.EndHorizontal();
         }
