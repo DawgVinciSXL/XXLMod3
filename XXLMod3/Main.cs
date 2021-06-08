@@ -61,6 +61,8 @@ namespace XXLMod3
                 uiController = new GameObject().AddComponent<UIController>();
                 xxlController = new GameObject().AddComponent<XXLController>();
                 stanceController = new GameObject().AddComponent<StanceController>();
+                PresetHelper.CreateFolder();
+                PresetHelper.GetPresets();
                 UnityEngine.Object.DontDestroyOnLoad(stanceController);
                 UnityEngine.Object.DontDestroyOnLoad(uiController);
                 UnityEngine.Object.DontDestroyOnLoad(xxlController);

@@ -196,36 +196,36 @@ namespace XXLMod3.Windows
 
         private static void DrawStancePresets()
         {
-            bool flag2 = StanceController.Instance.StancePresets == null;
+            bool flag2 = PresetHelper.StancePresets == null;
             if (flag2)
             {
-                StanceController.Instance.GetPresetsFromFolder();
+                PresetHelper.GetPresets();
             }
 
-            if (StanceController.Instance.StancePresets.Length >= 1)
+            if (PresetHelper.StancePresets.Length >= 1)
             {
                 GUILayout.BeginVertical("Box");
-                float num3 = (float)Mathf.Min(208, StanceController.Instance.StancePresets.Length * (200 + 2 * 2) + 2 * 2);
+                float num3 = (float)Mathf.Min(208, PresetHelper.StancePresets.Length * (200 + 2 * 2) + 2 * 2);
                 stanceScrollPos = GUILayout.BeginScrollView(stanceScrollPos, new GUILayoutOption[]
                 {
                     GUILayout.Height(num3),
                     GUILayout.ExpandHeight(true)
                 });
                 GUILayout.BeginVertical();
-                for (int i = 0; i < StanceController.Instance.StancePresets.Length; i++)
+                for (int i = 0; i < PresetHelper.StancePresets.Length; i++)
                 {
                     GUILayout.BeginHorizontal();
-                    string presetName = Path.GetFileNameWithoutExtension(StanceController.Instance.StancePresets[i]);
+                    string presetName = Path.GetFileNameWithoutExtension(PresetHelper.StancePresets[i]);
                     bool flag7 = GUILayout.Button("<b>" + presetName + "</b>", GUILayout.Height(21));
                     if (flag7)
                     {
-                        StanceUI.LoadStanceSettings(StanceController.Instance.presetPath + presetName + ".json");
+                        StanceUI.LoadStanceSettings(PresetHelper.StancePresetsPath + presetName + ".json");
                     }
                     bool flag8 = GUILayout.Button("<b>X</b>", GUILayout.Height(21f), GUILayout.Width(30f));
                     if (flag8)
                     {
-                        DeletePreset(StanceController.Instance.presetPath + presetName + ".json");
-                        StanceController.Instance.GetPresetsFromFolder();
+                        DeletePreset(PresetHelper.StancePresetsPath + presetName + ".json");
+                        PresetHelper.GetPresets();
                     }
                     GUILayout.EndHorizontal();
                 }

@@ -519,7 +519,7 @@ namespace XXLMod3.Windows
             {
                 StanceController.Instance.SaveFootPositionRotation();
                 SaveStanceSettings(presetPath + presetName, GetCurrentStance());
-                StanceController.Instance.GetPresetsFromFolder();
+                PresetHelper.GetPresets();
                 UISounds.Instance.PlayOneShotSelectMajor();
                 MessageSystem.QueueMessage(MessageDisplayData.Type.Success, $"Preset: {presetName} successfully saved!", 2f);
             }

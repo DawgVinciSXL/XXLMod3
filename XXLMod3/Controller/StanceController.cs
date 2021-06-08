@@ -78,6 +78,7 @@ namespace XXLMod3.Controller
         private CustomFeetObject ManualSwitchFeet = new CustomFeetObject();
         private CustomFeetObject NoseManualFeet = new CustomFeetObject();
         private CustomFeetObject NoseManualSwitchFeet = new CustomFeetObject();
+        private CustomFeetObject ManualOnButtonFeet = new CustomFeetObject();
 
         public CustomFeetObject BSBluntslideFeet = new CustomFeetObject();
         public CustomFeetObject BSBoardslideFeet = new CustomFeetObject();
@@ -134,8 +135,6 @@ namespace XXLMod3.Controller
 
         public string presetName = "ENTER PRESET NAME...";
 
-        public string presetPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\SkaterXL\\XXLMod3\\StancePresets\\";
-
         public static bool IsInEditMode;
         public static bool IsMongoPushing;
         public static bool IsRevertTriggered;
@@ -148,30 +147,13 @@ namespace XXLMod3.Controller
         private float RandomRightX = 0f;
         private float RandomRightZ = 0f;
 
-        public string[] StancePresets;
+        public bool IsRandomStance;
 
         private void Awake() => Instance = this;
 
         private void Start()
         {
-            CreateFolder();
-            GetPresetsFromFolder();
             Initialize();
-        }
-
-        private void CreateFolder()
-        {
-            if (!Directory.Exists(presetPath))
-            {
-                Directory.CreateDirectory(presetPath);
-            }
-        }
-
-        public void GetPresetsFromFolder()
-        {
-            StancePresets = (from file in Directory.EnumerateFiles(Path.Combine(presetPath), "*.json", SearchOption.AllDirectories)
-                            where file.Contains(".json")
-                            select file).ToArray<string>();
         }
 
         public void Initialize()
@@ -797,12 +779,12 @@ namespace XXLMod3.Controller
                         if (!PlayerController.Instance.IsSwitch)
                         {
                             SetFreeFootMovementLeft(true, false);
-                            DoLeftFootTransition(RidingFeet);
+                            DoLeftFootRidingTransition(RidingFeet);
                         }
                         else
                         {
                             SetFreeFootMovementLeft(true, false);
-                            DoLeftFootTransition(RidingSwitchFeet);
+                            DoLeftFootRidingTransition(RidingSwitchFeet);
                         }
                     }
                     if (PlayerController.Instance.inputController.player.GetButton("Right Stick Button"))
@@ -815,12 +797,12 @@ namespace XXLMod3.Controller
                         if (!PlayerController.Instance.IsSwitch)
                         {
                             SetFreeFootMovementRight(true, false);
-                            DoRightFootTransition(RidingFeet);
+                            DoRightFootRidingTransition(RidingFeet);
                         }
                         else
                         {
                             SetFreeFootMovementRight(true, false);
-                            DoRightFootTransition(RidingSwitchFeet);
+                            DoRightFootRidingTransition(RidingSwitchFeet);
                         }
                     }
                     break;
@@ -1359,6 +1341,28 @@ namespace XXLMod3.Controller
             SetRightFootToDefault();
         }
 
+        public void DoLeftFootRidingTransition(CustomFeetObject _feetObject)
+        {
+            if (_feetObject.StanceSettings.Active)
+            {
+                LeftFootIndicator.transform.position = Vector3.MoveTowards(LeftFootIndicator.transform.position, _feetObject.LeftFootPos.transform.position, IsRandomStance ? 0.2f * Time.deltaTime : _feetObject.StanceSettings.lfPosSpeed * Time.deltaTime);
+                LeftFootRotIndicator.transform.rotation = Quaternion.RotateTowards(LeftFootRotIndicator.transform.rotation, _feetObject.LeftFootRot.transform.rotation, _feetObject.StanceSettings.lfRotSpeed * Time.deltaTime);
+                return;
+            }
+            SetLeftFootToDefault();
+        }
+
+        public void DoRightFootRidingTransition(CustomFeetObject _feetObject)
+        {
+            if (_feetObject.StanceSettings.Active)
+            {
+                RightFootIndicator.transform.position = Vector3.MoveTowards(RightFootIndicator.transform.position, _feetObject.RightFootPos.transform.position, IsRandomStance ? 0.2f * Time.deltaTime : _feetObject.StanceSettings.rfPosSpeed * Time.deltaTime);
+                RightFootRotIndicator.transform.rotation = Quaternion.RotateTowards(RightFootRotIndicator.transform.rotation, _feetObject.RightFootRot.transform.rotation, _feetObject.StanceSettings.rfRotSpeed * Time.deltaTime);
+                return;
+            }
+            SetRightFootToDefault();
+        }
+
         private void GetRandomLeftFootPosition(GameObject lfPos, GameObject lfRot, float lfPosSpeed, float lfRotSpeed)
         {
             if (!GetRandomNumberLeft)
@@ -1370,6 +1374,7 @@ namespace XXLMod3.Controller
                 GetRandomNumberLeft = true;
             }
             LeftFootIndicator.transform.position = Vector3.MoveTowards(LeftFootIndicator.transform.position, lfPos.transform.position, 3f * Time.deltaTime);
+            IsRandomStance = true;
         }
 
         private void GetRandomRightFootPosition(GameObject rfPos, GameObject rfRot, float rfPosSpeed, float rfRotSpeed)
@@ -1384,6 +1389,7 @@ namespace XXLMod3.Controller
                 GetRandomNumberRight = true;
             }
             RightFootIndicator.transform.position = Vector3.MoveTowards(RightFootIndicator.transform.position, rfPos.transform.position, 3f * Time.deltaTime);
+            IsRandomStance = true;
         }
     }
 }
