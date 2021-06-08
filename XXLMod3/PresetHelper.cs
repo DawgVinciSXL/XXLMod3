@@ -32,19 +32,19 @@ namespace XXLMod3
         {
             GrindPresets = (from file in Directory.EnumerateFiles(Path.Combine(GrindPresetsPath), "*.json", SearchOption.AllDirectories)
                             where file.Contains(".json")
-                            select file).ToArray<string>();
+                            select file).ToArray();
 
             LegPresets = (from file in Directory.EnumerateFiles(Path.Combine(LegPresetsPath), "*.json", SearchOption.AllDirectories)
                           where file.Contains(".json")
-                          select file).ToArray<string>();
+                          select file).ToArray();
 
             StancePresets = (from file in Directory.EnumerateFiles(Path.Combine(StancePresetsPath), "*.json", SearchOption.AllDirectories)
                             where file.Contains(".json")
-                            select file).ToArray<string>();
+                            select file).ToArray();
 
             StatsPresets = (from file in Directory.EnumerateFiles(Path.Combine(StatsPresetsPath), "*.xml", SearchOption.AllDirectories)
                             where file.Contains(".xml")
-                            select file).ToArray<string>();
+                            select file).ToArray();
         }
     }
 }
