@@ -184,7 +184,6 @@ namespace XXLMod3.PlayerStates
             DetermineGrind();
             HandleCrouch();
             HandleStall();
-            OneFootGrind();
             XXLController.Instance.GrindPopOutSidewayForce = SidewayPopForce;
             XXLController.Instance.GrindStabilizer = Stabilizer;
             this._timeInState += Time.deltaTime;
@@ -1359,69 +1358,6 @@ namespace XXLMod3.PlayerStates
             }
         }
 
-        private void OneFootGrind()
-        {
-            switch (Main.settings.GrindOneFootMode)
-            {
-                case OneFootMode.Bumper:
-                    if (PlayerController.Instance.inputController.player.GetButton("LB"))
-                    {
-                        PlayerController.Instance.SetLeftIKLerpTarget(0.5f, 1f);
-                        PlayerController.Instance.SetLeftSteezeWeight(1f);
-                        PlayerController.Instance.SetMaxSteezeLeft(1f);
-                        PlayerController.Instance.SetLeftKneeIKTargetWeight(0.3f);
-                    }
-
-                    else if (PlayerController.Instance.inputController.player.GetButton("RB"))
-                    {
-                        PlayerController.Instance.SetRightIKLerpTarget(0.5f, 1f);
-                        PlayerController.Instance.SetRightSteezeWeight(1f);
-                        PlayerController.Instance.SetMaxSteezeRight(1f);
-                        PlayerController.Instance.SetRightKneeIKTargetWeight(0.3f);
-                    }
-
-                    else
-                    {
-                        ExitOneFootGrind();
-                    }
-                    break;
-                case OneFootMode.Buttons:
-                    if (PlayerController.Instance.inputController.player.GetButton("A"))
-                    {
-                        PlayerController.Instance.SetRightIKLerpTarget(0.5f, 1f);
-                        PlayerController.Instance.SetRightSteezeWeight(1f);
-                        PlayerController.Instance.SetMaxSteezeRight(1f);
-                        PlayerController.Instance.SetRightKneeIKTargetWeight(0.3f);
-                        return;
-                    }
-
-                    else if (PlayerController.Instance.inputController.player.GetButton("X"))
-                    {
-                        PlayerController.Instance.SetLeftIKLerpTarget(0.5f, 1f);
-                        PlayerController.Instance.SetLeftSteezeWeight(1f);
-                        PlayerController.Instance.SetMaxSteezeLeft(1f);
-                        PlayerController.Instance.SetLeftKneeIKTargetWeight(0.3f);
-                        return;
-                    }
-                    ExitOneFootGrind();
-                    break;
-            }
- 
-        }
-
-        private void ExitOneFootGrind()
-        {
-            PlayerController.Instance.SetRightIKLerpTarget(0f, 0f);
-            PlayerController.Instance.SetRightSteezeWeight(0f);
-            PlayerController.Instance.SetMaxSteezeRight(0f);
-            PlayerController.Instance.SetRightKneeIKTargetWeight(0f);
-
-            PlayerController.Instance.SetLeftIKLerpTarget(0f, 0f);
-            PlayerController.Instance.SetLeftSteezeWeight(0f);
-            PlayerController.Instance.SetMaxSteezeLeft(0f);
-            PlayerController.Instance.SetLeftKneeIKTargetWeight(0f);
-        }
-
         private void UpdateGrind(BaseGrindSettings GrindSettings)
         {
             AnimationSpeed = GrindSettings.AnimationSpeed;
@@ -1551,20 +1487,20 @@ namespace XXLMod3.PlayerStates
 
         private void DoStance(CustomFeetObject Stance)
         {
-            if (PlayerController.Instance.inputController.player.GetButton("Left Stick Button") && Main.settings.UseSpecialInGrindState)
+            if (Main.settings.GrindOneFootMode == OneFootMode.Bumper && PlayerController.Instance.inputController.player.GetButton("LB") || Main.settings.GrindOneFootMode == OneFootMode.Buttons && PlayerController.Instance.inputController.player.GetButton("X") || Main.settings.GrindOneFootMode == OneFootMode.Sticks && PlayerController.Instance.inputController.player.GetButton("Left Stick Button"))
             {
                 StanceController.Instance.SetFreeFootMovementLeft(false, true);
-                StanceController.Instance.DoLeftFootTransition(StanceController.Instance.OnButtonFeet);
+                StanceController.Instance.DoLeftFootTransition(StanceController.Instance.GrindOnButtonFeet);
             }
             else
             {
                 StanceController.Instance.SetFreeFootMovementLeft(true, false);
                 StanceController.Instance.DoLeftFootTransition(Stance);
             }
-            if (PlayerController.Instance.inputController.player.GetButton("Right Stick Button") && Main.settings.UseSpecialInGrindState)
+            if (Main.settings.GrindOneFootMode == OneFootMode.Bumper && PlayerController.Instance.inputController.player.GetButton("RB") || Main.settings.GrindOneFootMode == OneFootMode.Buttons && PlayerController.Instance.inputController.player.GetButton("A") || Main.settings.GrindOneFootMode == OneFootMode.Sticks && PlayerController.Instance.inputController.player.GetButton("Right Stick Button"))
             {
                 StanceController.Instance.SetFreeFootMovementRight(false, true);
-                StanceController.Instance.DoRightFootTransition(StanceController.Instance.OnButtonFeet);
+                StanceController.Instance.DoRightFootTransition(StanceController.Instance.GrindOnButtonFeet);
             }
             else
             {

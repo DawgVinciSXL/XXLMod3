@@ -1512,7 +1512,7 @@ namespace XXLMod3.PlayerStates
 
         private void DoStance(CustomFeetObject Stance)
         {
-            if (PlayerController.Instance.inputController.player.GetButton("Left Stick Button") && Main.settings.UseSpecialInGrindState)
+            if (PlayerController.Instance.inputController.player.GetButton("Left Stick Button"))
             {
                 StanceController.Instance.SetFreeFootMovementLeft(false, true);
                 StanceController.Instance.DoLeftFootTransition(StanceController.Instance.OnButtonFeet);
@@ -1522,7 +1522,7 @@ namespace XXLMod3.PlayerStates
                 StanceController.Instance.SetFreeFootMovementLeft(true, false);
                 StanceController.Instance.DoLeftFootTransition(Stance);
             }
-            if (PlayerController.Instance.inputController.player.GetButton("Right Stick Button") && Main.settings.UseSpecialInGrindState)
+            if (PlayerController.Instance.inputController.player.GetButton("Right Stick Button"))
             {
                 StanceController.Instance.SetFreeFootMovementRight(false, true);
                 StanceController.Instance.DoRightFootTransition(StanceController.Instance.OnButtonFeet);

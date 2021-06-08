@@ -451,7 +451,6 @@ namespace XXLMod3.PlayerStates
             base.Update();
             AdvancedPop();
             HandleCrouch(); ///////////
-            OneFootManual(PlayerController.Instance); //////////
             SoundManager.Instance.SetRollingVolumeFromRPS(PlayerController.Instance.GetSurfaceTag(PlayerController.Instance.boardController.GetSurfaceTagString()), PlayerController.Instance.boardController.boardRigidbody.velocity.magnitude);
             if (_canEnterCopingGrind)
             {
@@ -1060,57 +1059,6 @@ namespace XXLMod3.PlayerStates
                     break;
                 case CrouchMode.Off:
                     break;
-            }
-        }
-
-        private void OneFootManual(PlayerController playerController)
-        {
-            if (Main.settings.ManualOneFootMode == OneFootMode.Bumper)
-            {
-                if (playerController.inputController.player.GetButton("LB"))
-                {
-                    playerController.SetLeftIKLerpTarget(0.5f, 1f);
-                    playerController.SetLeftSteezeWeight(1f);
-                    playerController.SetMaxSteezeLeft(1f);
-                    playerController.SetLeftKneeIKTargetWeight(0.3f);
-                }
-
-                else if (playerController.inputController.player.GetButton("RB"))
-                {
-                    playerController.SetRightIKLerpTarget(0.5f, 1f);
-                    playerController.SetRightSteezeWeight(1f);
-                    playerController.SetMaxSteezeRight(1f);
-                    playerController.SetRightKneeIKTargetWeight(0.3f);
-                }
-
-                else
-                {
-                    ExitOneFootManual(playerController);
-                }
-            }
-
-            else if (Main.settings.ManualOneFootMode == OneFootMode.Buttons)
-            {
-                if (playerController.inputController.player.GetButton("A"))
-                {
-                    playerController.SetRightIKLerpTarget(0.5f, 1f);
-                    playerController.SetRightSteezeWeight(1f);
-                    playerController.SetMaxSteezeRight(1f);
-                    playerController.SetRightKneeIKTargetWeight(0.3f);
-                }
-
-                else if (playerController.inputController.player.GetButton("X"))
-                {
-                    playerController.SetLeftIKLerpTarget(0.5f, 1f);
-                    playerController.SetLeftSteezeWeight(1f);
-                    playerController.SetMaxSteezeLeft(1f);
-                    playerController.SetLeftKneeIKTargetWeight(0.3f);
-                }
-
-                else
-                {
-                    ExitOneFootManual(playerController);
-                }
             }
         }
 

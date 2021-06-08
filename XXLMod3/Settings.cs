@@ -266,8 +266,6 @@ namespace XXLMod3
         public Quaternion rtOriginalRot = Quaternion.identity;
 
         public bool UseSimpleOnButtonGrabs = false;
-        public bool UseSpecialInGrindState = true;
-        public bool UseSpecialInManualState = true;
         public bool UseSpecialInReleaseState = true;
         public bool UseSpecialInPrimoState = true;
         public bool UseRandomLanding = true;
@@ -300,6 +298,7 @@ namespace XXLMod3
         public CustomStanceSettings ManualSwitchStanceSettings = new CustomStanceSettings(true, 1f, 100f, 1f, 100f, Quaternion.identity, Quaternion.identity, Vector3.zero, Vector3.zero, Quaternion.identity, Quaternion.identity);
         public CustomStanceSettings NoseManualStanceSettings = new CustomStanceSettings(true, 1f, 100f, 1f, 100f, Quaternion.identity, Quaternion.identity, Vector3.zero, Vector3.zero, Quaternion.identity, Quaternion.identity);
         public CustomStanceSettings NoseManualSwitchStanceSettings = new CustomStanceSettings(true, 1f, 100f, 1f, 100f, Quaternion.identity, Quaternion.identity, Vector3.zero, Vector3.zero, Quaternion.identity, Quaternion.identity);
+        public CustomStanceSettings ManualOnButtonSettings = new CustomStanceSettings(true, 1f, 100f, 1f, 100f, Quaternion.identity, Quaternion.identity, Vector3.zero, Vector3.zero, Quaternion.identity, Quaternion.identity);
 
         public CustomStanceSettings BSBluntslideStanceSettings = new CustomStanceSettings(true, 1f, 100f, 1f, 100f, Quaternion.identity, Quaternion.identity, Vector3.zero, Vector3.zero, Quaternion.identity, Quaternion.identity);
         public CustomStanceSettings BSBoardslideStanceSettings = new CustomStanceSettings(true, 1f, 100f, 1f, 100f, Quaternion.identity, Quaternion.identity, Vector3.zero, Vector3.zero, Quaternion.identity, Quaternion.identity);
@@ -336,6 +335,8 @@ namespace XXLMod3
         public CustomStanceSettings FSSuskiStanceSettings = new CustomStanceSettings(true, 1f, 100f, 1f, 100f, Quaternion.identity, Quaternion.identity, Vector3.zero, Vector3.zero, Quaternion.identity, Quaternion.identity);
         public CustomStanceSettings FSTailslideStanceSettings = new CustomStanceSettings(true, 1f, 100f, 1f, 100f, Quaternion.identity, Quaternion.identity, Vector3.zero, Vector3.zero, Quaternion.identity, Quaternion.identity);
         public CustomStanceSettings FSWillyStanceSettings = new CustomStanceSettings(true, 1f, 100f, 1f, 100f, Quaternion.identity, Quaternion.identity, Vector3.zero, Vector3.zero, Quaternion.identity, Quaternion.identity);
+
+        public CustomStanceSettings GrindOnButtonSettings = new CustomStanceSettings(true, 1f, 100f, 1f, 100f, Quaternion.identity, Quaternion.identity, Vector3.zero, Vector3.zero, Quaternion.identity, Quaternion.identity);
 
         public CustomStanceSettings IndyStanceSettings = new CustomStanceSettings(true, 1f, 100f, 1f, 100f, Quaternion.identity, Quaternion.identity, Vector3.zero, Vector3.zero, Quaternion.identity, Quaternion.identity);
         public CustomStanceSettings MelonStanceSettings = new CustomStanceSettings(true, 1f, 100f, 1f, 100f, Quaternion.identity, Quaternion.identity, Vector3.zero, Vector3.zero, Quaternion.identity, Quaternion.identity);

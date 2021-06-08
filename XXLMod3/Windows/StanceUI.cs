@@ -61,9 +61,7 @@ namespace XXLMod3.Windows
             {
                 GUILayout.BeginHorizontal("Box");
                 GUI.backgroundColor = Color.white;
-                Main.settings.UseSpecialInGrindState = GUILayout.Toggle(Main.settings.UseSpecialInGrindState, "Active while Grinding", GUILayout.Height(21f));
                 Main.settings.UseSpecialInReleaseState = GUILayout.Toggle(Main.settings.UseSpecialInReleaseState, "Active while Catching", GUILayout.Height(21f));
-                Main.settings.UseSpecialInManualState = GUILayout.Toggle(Main.settings.UseSpecialInManualState, "Active while Manualling", GUILayout.Height(21f));
                 Main.settings.UseSpecialInPrimoState = GUILayout.Toggle(Main.settings.UseSpecialInPrimoState, "Active while Primo", GUILayout.Height(21f));
                 GUI.backgroundColor = Color.black;
                 GUILayout.EndHorizontal();
@@ -142,6 +140,12 @@ namespace XXLMod3.Windows
                     break;
                 case StanceTab.NoseManualSwitch:
                     DoStanceSettings(Main.settings.NoseManualSwitchStanceSettings);
+                    break;
+                case StanceTab.ManualOnButton:
+                    DoManualOnButtonSettings();
+                    break;
+                case StanceTab.GrindOnButton:
+                    DoGrindOnButtonSettings();
                     break;
             }
 
@@ -229,6 +233,18 @@ namespace XXLMod3.Windows
                     GrabOffBoardStanceTab = GrabOffBoardStanceTab.Simple;
                 }
             }
+            DoStanceSettings(GetCurrentStance());
+        }
+
+        private static void DoGrindOnButtonSettings()
+        {
+            Main.settings.GrindOneFootMode = RGUI.Field(Main.settings.GrindOneFootMode, "One Foot Mode");
+            DoStanceSettings(GetCurrentStance());
+        }
+
+        private static void DoManualOnButtonSettings()
+        {
+            Main.settings.ManualOneFootMode = RGUI.Field(Main.settings.ManualOneFootMode, "One Foot Mode");
             DoStanceSettings(GetCurrentStance());
         }
 
@@ -692,6 +708,10 @@ namespace XXLMod3.Windows
                     return Main.settings.NoseManualStanceSettings;
                 case StanceTab.NoseManualSwitch:
                     return Main.settings.NoseManualSwitchStanceSettings;
+                case StanceTab.ManualOnButton:
+                    return Main.settings.ManualOnButtonSettings;
+                case StanceTab.GrindOnButton:
+                    return Main.settings.GrindOnButtonSettings;
                 default:
                     return Main.settings.DefaultStanceSettings;
             }

@@ -116,6 +116,8 @@ namespace XXLMod3.Controller
         public CustomFeetObject FSTailslideFeet = new CustomFeetObject();
         public CustomFeetObject FSWillyFeet = new CustomFeetObject();
 
+        public CustomFeetObject GrindOnButtonFeet = new CustomFeetObject();
+
         public CustomFeetObject IndyFeet = new CustomFeetObject();
         public CustomFeetObject MelonFeet = new CustomFeetObject();
         public CustomFeetObject MuteFeet = new CustomFeetObject();
@@ -223,6 +225,7 @@ namespace XXLMod3.Controller
             CreateFeetObject(ManualSwitchFeet, Main.settings.ManualSwitchStanceSettings);
             CreateFeetObject(NoseManualFeet, Main.settings.NoseManualStanceSettings);
             CreateFeetObject(NoseManualSwitchFeet, Main.settings.NoseManualSwitchStanceSettings);
+            CreateFeetObject(ManualOnButtonFeet, Main.settings.ManualOnButtonSettings);
 
             CreateFeetObject(BSBluntslideFeet, Main.settings.BSBluntslideStanceSettings);
             CreateFeetObject(BSBoardslideFeet, Main.settings.BSBoardslideStanceSettings);
@@ -259,6 +262,8 @@ namespace XXLMod3.Controller
             CreateFeetObject(FSSuskiFeet, Main.settings.FSSuskiStanceSettings);
             CreateFeetObject(FSTailslideFeet, Main.settings.FSTailslideStanceSettings);
             CreateFeetObject(FSWillyFeet, Main.settings.FSWillyStanceSettings);
+
+            CreateFeetObject(GrindOnButtonFeet, Main.settings.GrindOnButtonSettings);
 
             CreateFeetObject(IndyFeet, Main.settings.IndyStanceSettings);
             CreateFeetObject(MelonFeet, Main.settings.MelonStanceSettings);
@@ -567,6 +572,12 @@ namespace XXLMod3.Controller
                         case StanceTab.NoseManualSwitch:
                             SetActiveTarget(NoseManualSwitchFeet, false, false, false);
                             break;
+                        case StanceTab.ManualOnButton:
+                            SetActiveTarget(ManualOnButtonFeet, false, false, false);
+                            break;
+                        case StanceTab.GrindOnButton:
+                            SetActiveTarget(GrindOnButtonFeet, false, false, false);
+                            break;
                     }
 
                     LeftFootIndicator.transform.position = ActiveLeftFootTarget.transform.position;
@@ -696,6 +707,7 @@ namespace XXLMod3.Controller
             SaveFeet(ManualSwitchFeet);
             SaveFeet(NoseManualFeet);
             SaveFeet(NoseManualSwitchFeet);
+            SaveFeet(ManualOnButtonFeet);
 
             SaveFeet(BSBluntslideFeet);
             SaveFeet(BSBoardslideFeet);
@@ -732,6 +744,8 @@ namespace XXLMod3.Controller
             SaveFeet(FSSuskiFeet);
             SaveFeet(FSTailslideFeet);
             SaveFeet(FSWillyFeet);
+
+            SaveFeet(GrindOnButtonFeet);
 
             SaveFeet(IndyFeet);
             SaveFeet(MelonFeet);
@@ -949,10 +963,10 @@ namespace XXLMod3.Controller
                     }
                     break;
                 case CurrentState.Manual:
-                    if (PlayerController.Instance.inputController.player.GetButton("Left Stick Button") && Main.settings.UseSpecialInManualState)
+                    if (Main.settings.ManualOneFootMode == OneFootMode.Bumper && PlayerController.Instance.inputController.player.GetButton("LB") || Main.settings.ManualOneFootMode == OneFootMode.Buttons && PlayerController.Instance.inputController.player.GetButton("X") || Main.settings.ManualOneFootMode == OneFootMode.Sticks && PlayerController.Instance.inputController.player.GetButton("Left Stick Button"))
                     {
                         SetFreeFootMovementLeft(false, true);
-                        DoLeftFootTransition(OnButtonFeet);
+                        DoLeftFootTransition(ManualOnButtonFeet);
                     }
                     else
                     {
@@ -976,10 +990,10 @@ namespace XXLMod3.Controller
                                 break;
                         }
                     }
-                    if (PlayerController.Instance.inputController.player.GetButton("Right Stick Button") && Main.settings.UseSpecialInManualState)
+                    if (Main.settings.ManualOneFootMode == OneFootMode.Bumper && PlayerController.Instance.inputController.player.GetButton("RB") || Main.settings.ManualOneFootMode == OneFootMode.Buttons && PlayerController.Instance.inputController.player.GetButton("A") || Main.settings.ManualOneFootMode == OneFootMode.Sticks && PlayerController.Instance.inputController.player.GetButton("Right Stick Button"))
                     {
                         SetFreeFootMovementRight(false, true);
-                        DoRightFootTransition(OnButtonFeet);
+                        DoRightFootTransition(ManualOnButtonFeet);
                     }
                     else
                     {

@@ -2,7 +2,7 @@
     "Id": "XXLMod3",
     "DisplayName": "XXLMod3 for SXL 1.2.1.1b",
     "Author": "DawgVinci",
-    "Version": "1.1.6",
+    "Version": "1.1.7",
     "ManagerVersion": "0.22.5.0",
     "AssemblyName": "XXLMod3.dll",
     "EntryMethod": "XXLMod3.Main.Load",
