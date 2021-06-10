@@ -3,6 +3,7 @@ using RapidGUI;
 using System.IO;
 using UnityEngine;
 using XXLMod3.Controller;
+using XXLMod3.Core;
 
 namespace XXLMod3.Windows
 {
@@ -11,7 +12,7 @@ namespace XXLMod3.Windows
         public static bool showMenu;
         public static Rect Rect = new Rect(1150f, Screen.currentResolution.height / 2 - 370.5f, 100f, 300f);
 
-        public static Core.PresetTab PresetTab = Core.PresetTab.Stats;
+        public static PresetTab PresetTab = PresetTab.Stats;
 
         static Vector2 grindScrollPos = Vector2.zero;
         static Vector2 legScrollPos = Vector2.zero;
@@ -31,16 +32,16 @@ namespace XXLMod3.Windows
 
             switch (PresetTab)
             {
-                case Core.PresetTab.Stats:
+                case PresetTab.Stats:
                     DrawStatPresets();
                     break;
-                case Core.PresetTab.Grinds:
+                case PresetTab.Grinds:
                     DrawGrindPresets();
                     break;
-                case Core.PresetTab.Legs:
+                case PresetTab.Legs:
                     DrawLegPresets();
                     break;
-                case Core.PresetTab.Stances:
+                case PresetTab.Stances:
                     DrawStancePresets();
                     break;
             }
@@ -71,13 +72,13 @@ namespace XXLMod3.Windows
                     bool flag7 = GUILayout.Button("<b>" + presetName + "</b>", GUILayout.Height(21));
                     if (flag7)
                     {
-                        Main.settings = Core.SaveStats.Load<Settings>(Main.modEntry, PresetHelper.StatsPresetsPath + presetName + ".xml");
+                        Main.settings = SaveStats.Load<Settings>(Main.modEntry, PresetHelper.StatsPresetsPath + presetName + ".xml");
                         StanceController.Instance.Initialize();
                     }
                     bool flag8 = GUILayout.Button("<b>X</b>", GUILayout.Height(21f), GUILayout.Width(30f));
                     if (flag8)
                     {
-                        DeletePreset(PresetHelper.StatsPresetsPath + presetName + ".xml");
+                        PresetHelper.DeletePreset(PresetHelper.StatsPresetsPath + presetName + ".xml");
                         PresetHelper.GetPresets();
                     }
                     GUILayout.EndHorizontal();
@@ -134,7 +135,7 @@ namespace XXLMod3.Windows
                     bool flag8 = GUILayout.Button("<b>X</b>", GUILayout.Height(21f), GUILayout.Width(30f));
                     if (flag8)
                     {
-                        DeletePreset(PresetHelper.GrindPresetsPath + presetName + ".json");
+                        PresetHelper.DeletePreset(PresetHelper.GrindPresetsPath + presetName + ".json");
                         PresetHelper.GetPresets();
                     }
                     GUILayout.EndHorizontal();
@@ -179,7 +180,7 @@ namespace XXLMod3.Windows
                     bool flag8 = GUILayout.Button("<b>X</b>", GUILayout.Height(21f), GUILayout.Width(30f));
                     if (flag8)
                     {
-                        DeletePreset(PresetHelper.LegPresetsPath + presetName + ".json");
+                        PresetHelper.DeletePreset(PresetHelper.LegPresetsPath + presetName + ".json");
                         PresetHelper.GetPresets();
                     }
                     GUILayout.EndHorizontal();
@@ -224,7 +225,7 @@ namespace XXLMod3.Windows
                     bool flag8 = GUILayout.Button("<b>X</b>", GUILayout.Height(21f), GUILayout.Width(30f));
                     if (flag8)
                     {
-                        DeletePreset(PresetHelper.StancePresetsPath + presetName + ".json");
+                        PresetHelper.DeletePreset(PresetHelper.StancePresetsPath + presetName + ".json");
                         PresetHelper.GetPresets();
                     }
                     GUILayout.EndHorizontal();
@@ -237,11 +238,6 @@ namespace XXLMod3.Windows
             {
                 GUILayout.Box("<b>No Presets Found!</b>", GUILayout.Height(21f));
             }
-        }
-
-        private static void DeletePreset(string fileName)
-        {
-            File.Delete(fileName);
         }
 
         private static void Title()

@@ -41,7 +41,7 @@ namespace XXLMod3.PlayerStates
             XXLController.Instance.FlipDetected = false;
             if (Main.settings.BailRespawnAt)
             {
-                Extentions.InvokeMethod(PlayerController.Instance.respawn, "SetSpawnPos");
+                Utils.InvokeMethod(PlayerController.Instance.respawn, "SetSpawnPos");
             }
             if (Main.settings.BetterBails)
             {

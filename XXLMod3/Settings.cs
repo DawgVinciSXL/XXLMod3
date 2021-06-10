@@ -43,6 +43,7 @@ namespace XXLMod3
         public float CatchBoardRotateSpeed = 57.29578f;
         public bool CatchCorrection = true;
         public float CatchCorrectionSpeed = 0f;
+        public float CatchFootIkLerpSpeed = 4f;
         public CatchMode CatchMode = CatchMode.Auto;
         public bool CatchSmooth = false;
         public bool RealisticDrops = false;
@@ -142,6 +143,12 @@ namespace XXLMod3
         public bool ManualPopDelay = true;
         public float ManualPopForce = 2.5f;
         public OneFootMode ManualOneFootMode = OneFootMode.Off;
+        #endregion
+
+        #region PowerslideSettings
+        public float PowerslideFriction = 1f;
+        public bool PowerslidePopOut = false;
+        public float PowerslidePopForce = 2.5f;
         #endregion
 
         #region PrimoSettings
@@ -355,7 +362,7 @@ namespace XXLMod3
         #endregion
 
         #region XLAnimationModifier
-        public bool FixedRevertAnimation = false;
+        public bool RevertAnimationCancel = false;
         #endregion
 
         public void OnChange()

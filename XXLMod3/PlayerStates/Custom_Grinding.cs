@@ -108,7 +108,7 @@ namespace XXLMod3.PlayerStates
                 this._spline = PlayerController.Instance.boardController.triggerManager.spline;
             PlayerController.Instance.ToggleFlipColliders(false);
             //PlayerController.Instance.SetBoardPhysicsMaterial(PlayerController.FrictionType.Grind);
-            foreach (Collider collider in PlayerController.Instance.boardController.boardTransform.GetComponentsInChildren<Collider>())
+            foreach (Collider collider in XXLController.Instance.BoardCollider)
             {
                 collider.material = XXLController.GrindPhysicsMaterial;
             }

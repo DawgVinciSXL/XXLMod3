@@ -139,7 +139,12 @@ namespace XXLMod3.PlayerStates
             PlayerController.Instance.SetTurningMode(InputController.TurningMode.Powerslide);
             PlayerController.Instance.SetTurnMultiplier(20f);
             _negation = ((!PlayerController.Instance.GetBoardBackwards()) ? 1 : -1);
-            PlayerController.Instance.SetBoardPhysicsMaterial(PlayerController.FrictionType.Powerslide);
+            //PlayerController.Instance.SetBoardPhysicsMaterial(PlayerController.FrictionType.Powerslide);
+            foreach (Collider collider in XXLController.Instance.BoardCollider)
+            {
+                collider.material = XXLController.PowerslidePhysicsMaterial;
+                XXLController.PowerslidePhysicsMaterial.dynamicFriction = Main.settings.PowerslideFriction;
+            }
             EventManager.Instance.EnterPowerSlide();
             XXLController.Instance.ActivateSlowMotion(Main.settings.SlowMotionReverts, Main.settings.SlowMotionRevertSpeed);
         }
@@ -595,22 +600,22 @@ namespace XXLMod3.PlayerStates
                     {
                         if (_signedAngle > 0f)
                         {
-                            PlayerController.Instance.CrossFadeAnimation("R_Com_Bs_Revert",(Main.settings.FixedRevertAnimation ? 1f : 0.2f));
+                            PlayerController.Instance.CrossFadeAnimation("R_Com_Bs_Revert",(Main.settings.RevertAnimationCancel ? 1f : 0.2f));
                         }
                         else
                         {
-                            PlayerController.Instance.CrossFadeAnimation("R_Com_Fs_Revert", (Main.settings.FixedRevertAnimation ? 1f : 0.2f));
+                            PlayerController.Instance.CrossFadeAnimation("R_Com_Fs_Revert", (Main.settings.RevertAnimationCancel ? 1f : 0.2f));
                         }
                     }
                     else if (!_toFakie && _wasFakie)
                     {
                         if (_signedAngle > 0f)
                         {
-                            PlayerController.Instance.CrossFadeAnimation("R_Com_Bs_Switch_Revert", (Main.settings.FixedRevertAnimation ? 1f : 0.2f));
+                            PlayerController.Instance.CrossFadeAnimation("R_Com_Bs_Switch_Revert", (Main.settings.RevertAnimationCancel ? 1f : 0.2f));
                         }
                         else
                         {
-                            PlayerController.Instance.CrossFadeAnimation("R_Com_Fs_Switch_Revert", (Main.settings.FixedRevertAnimation ? 1f : 0.2f));
+                            PlayerController.Instance.CrossFadeAnimation("R_Com_Fs_Switch_Revert", (Main.settings.RevertAnimationCancel ? 1f : 0.2f));
                         }
                     }
                     else
@@ -620,7 +625,7 @@ namespace XXLMod3.PlayerStates
                         PlayerController.Instance.CrossFadeAnimation("Riding", 0.2f);
                     }
                     PlayerController.Instance.SetKneeBendWeightManually(0.2f);
-                    _revertAnimTriggered = (Main.settings.FixedRevertAnimation ? false : true);
+                    _revertAnimTriggered = (Main.settings.RevertAnimationCancel ? false : true);
                     return;
                 }
             }
@@ -915,6 +920,64 @@ namespace XXLMod3.PlayerStates
         public override bool IsInPowerslideState()
         {
             return true;
+        }
+
+        bool _forwardLoad;
+        StickInput _popStick;
+        StickInput _flipStick;
+        float _invertVel;
+        PlayerController.SetupDir _setupDir;
+        float _augmentedLeftAngle;
+        float _augmentedRightAngle;
+        float _popVel;
+        float _toeAxis;
+        float _popDir;
+
+        public override void OnStickPressed(bool right)
+        {
+            BabyPop(right);
+        }
+
+        private void BabyPop(bool right)
+        {
+            if (!Main.settings.PowerslidePopOut)
+            {
+                return;
+            }
+
+            if(SettingsManager.Instance.stance == Stance.Goofy)
+            {
+                _popStick = _leftStickInput;
+                _flipStick = _rightStickInput;
+            }
+            else
+            {
+                _popStick = _rightStickInput;
+                _flipStick = _leftStickInput;
+            }
+
+            _forwardLoad = (PlayerController.Instance.GetNollie(_popStick.IsRightStick) > 0.1f);
+            PlayerController.Instance.skaterController.InitializeSkateRotation();
+            PlayerController.Instance.SetTurningMode(InputController.TurningMode.InAir);
+            PlayerController.Instance.SetSkaterToMaster();
+
+            float num = Main.settings.PowerslidePopForce;
+            EventManager.Instance.EnterAir();
+            object[] args = new object[]
+                {
+                _popStick,
+                _flipStick,
+                num,
+                _forwardLoad,
+                _invertVel,
+                _setupDir,
+                _augmentedLeftAngle,
+                _augmentedRightAngle,
+                _popVel,
+                _toeAxis,
+                _popDir
+                };
+            DoTransition(typeof(Custom_BeginPop), args);
         }
     }
 }

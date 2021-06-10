@@ -1093,18 +1093,6 @@ namespace XXLMod3.PlayerStates
             }
         }
 
-        private void ExitOneFootManual(PlayerController playerController)
-        {
-            playerController.SetRightIKLerpTarget(0f, 0f);
-            playerController.SetRightSteezeWeight(0f);
-            playerController.SetMaxSteezeRight(0f);
-            playerController.SetRightKneeIKTargetWeight(0f);
-
-            playerController.SetLeftIKLerpTarget(0f, 0f);
-            playerController.SetLeftSteezeWeight(0f);
-            playerController.SetMaxSteezeLeft(0f);
-            playerController.SetLeftKneeIKTargetWeight(0f);
-        }
 
         public override void OnStickPressed(bool right)
         {

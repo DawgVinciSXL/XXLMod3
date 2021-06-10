@@ -1,7 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Linq;
-using UnityEngine;
+﻿using UnityEngine;
 using XXLMod3.Core;
 using XXLMod3.Windows;
 
@@ -32,54 +29,45 @@ namespace XXLMod3.Controller
         {
             if (Input.GetKeyDown(Main.settings.XXLHotkey.keyCode))
             {
-                bool flag = !showMainMenu;
-                if (flag)
+                if (!showMainMenu)
                 {
                     Open();
+                    return;
                 }
-                else
-                {
-                    Close();
-                }
+                Close();
+                return;
             }
 
             if (Input.GetKeyDown(Main.settings.MultiplayerHotkey.keyCode))
             {
-                bool flag = !MultiplayerUI.showMenu;
-                if (flag)
+                if (!MultiplayerUI.showMenu)
                 {
                     MultiplayerUI.Open();
+                    return;
                 }
-                else
-                {
-                    MultiplayerUI.Close();
-                }
+                MultiplayerUI.Close();
+                return;
             }
 
             if (Input.GetKeyDown(Main.settings.PresetsHotkey.keyCode))
             {
-                bool flag = !PresetUI.showMenu;
-                if (flag)
+                if (!PresetUI.showMenu)
                 {
                     PresetUI.Open();
+                    return;
                 }
-                else
-                {
-                    PresetUI.Close();
-                }
+                PresetUI.Close();
+                return;
             }
 
             if (Input.GetKeyDown(Main.settings.StanceHotkey.keyCode))
             {
-                bool flag = !StanceUI.showMenu;
-                if (flag)
+                if (!StanceUI.showMenu)
                 {
                     StanceUI.Open();
+                    return;
                 }
-                else
-                {
-                    StanceUI.Close();
-                }
+                StanceUI.Close();
             }
         }
 
@@ -100,27 +88,8 @@ namespace XXLMod3.Controller
             Cursor.visible = false;
         }
 
-        private void SetupGUI()
-        {
-            windowTex = new Texture2D(1, 1);
-            var brightness = 1f;
-            var alpha = 0.9f;
-            windowTex.SetPixels(new[] { new Color(brightness, brightness, brightness, alpha) });
-            windowTex.Apply();
-
-            windowStyle = new GUIStyle(GUI.skin.window)
-            {
-            };
-            windowStyle.normal.background = windowTex;
-        }
-
         private void OnGUI()
         {
-            //if (!setupGUI)
-            //{
-            //    SetupGUI();
-            //    setupGUI = true;
-            //}
             if (showMainMenu)
             {
                 GUI.backgroundColor = Main.settings.BGColor;
@@ -129,10 +98,10 @@ namespace XXLMod3.Controller
                 switch (MenuTab)
                 {
                     case MenuTab.General:
-                        TabMenuRect = GUI.Window(9001, new Rect(TabMenuRect.position,new Vector2(444f, 697f)), GeneralSettings.Window, "<b>XXLMOD3</b>");
+                        TabMenuRect = GUI.Window(9001, new Rect(TabMenuRect.position,new Vector2(444f, 664f)), GeneralSettings.Window, "<b>XXLMOD3</b>");
                         break;
                     case MenuTab.Catch:
-                        TabMenuRect = GUI.Window(9001, new Rect(TabMenuRect.position, new Vector2(444f, 246f)), CatchUI.Window, "<b>XXLMOD3</b>");
+                        TabMenuRect = GUI.Window(9001, new Rect(TabMenuRect.position, new Vector2(444f, 271f)), CatchUI.Window, "<b>XXLMOD3</b>");
                         break;
                     case MenuTab.Flips:
                         TabMenuRect = GUI.Window(9001, new Rect(TabMenuRect.position, new Vector2(444f, 398f)), FlipSettings.Window, "<b>XXLMOD3</b>");
@@ -155,11 +124,14 @@ namespace XXLMod3.Controller
                     case MenuTab.Manuals:
                         TabMenuRect = GUI.Window(9001, new Rect(TabMenuRect.position, new Vector2(444f, 398f)), ManualSettings.Window, "<b>XXLMOD3</b>");
                         break;
+                    case MenuTab.Powerslide:
+                        TabMenuRect = GUI.Window(9001, new Rect(TabMenuRect.position, new Vector2(444f, 278f)), PowerslideUI.Window, "<b>XXLMOD3</b>");
+                        break;
                     case MenuTab.Primos:
                         TabMenuRect = GUI.Window(9001, new Rect(TabMenuRect.position, new Vector2(444f, 381f)), PrimoUI.Window, "<b>XXLMOD3</b>");
                         break;
                     case MenuTab.Misc:
-                        TabMenuRect = GUI.Window(9001, new Rect(TabMenuRect.position, new Vector2(444f, 553f)), MiscSettings.Window, "<b>XXLMOD3</b>");
+                        TabMenuRect = GUI.Window(9001, new Rect(TabMenuRect.position, new Vector2(444f, 438f)), MiscSettings.Window, "<b>XXLMOD3</b>");
                         break;
                     case MenuTab.Bail:
                         TabMenuRect = GUI.Window(9001, new Rect(TabMenuRect.position, new Vector2(444f, 336f)), BailUI.Window, "<b>XXLMOD3</b>");
@@ -179,26 +151,26 @@ namespace XXLMod3.Controller
             if (Windows.DebugUI.showMenu)
             {
                 GUI.backgroundColor = Main.settings.BGColor;
-                Windows.DebugUI.rect = GUILayout.Window(9013, Windows.DebugUI.rect, Windows.DebugUI.Window, "<b>XXLMOD3</b>");
+                Windows.DebugUI.rect = GUILayout.Window(9002, Windows.DebugUI.rect, Windows.DebugUI.Window, "<b>XXLMOD3</b>");
             }
 
             if (MultiplayerUI.showMenu)
             {
                 GUI.backgroundColor = Main.settings.BGColor;
-                MultiplayerUI.Rect = GUILayout.Window(9014, MultiplayerUI.Rect, MultiplayerUI.Window, "<b>XXLMOD3</b>");
+                MultiplayerUI.Rect = GUILayout.Window(9003, MultiplayerUI.Rect, MultiplayerUI.Window, "<b>XXLMOD3</b>");
             }
 
             if (PresetUI.showMenu)
             {
                 GUI.backgroundColor = Main.settings.BGColor;
-                PresetUI.Rect = GUILayout.Window(9015, PresetUI.Rect, PresetUI.Window, "<b>XXLMOD3</b>");
+                PresetUI.Rect = GUILayout.Window(9004, PresetUI.Rect, PresetUI.Window, "<b>XXLMOD3</b>");
             }
 
             if (StanceUI.showMenu)
             {
                 StanceController.IsInEditMode = true;
                 GUI.backgroundColor = Main.settings.BGColor;
-                StanceUI.Rect = GUILayout.Window(9016, StanceUI.Rect, StanceUI.Window, "<b>XXLMOD3</b>");
+                StanceUI.Rect = GUILayout.Window(9005, StanceUI.Rect, StanceUI.Window, "<b>XXLMOD3</b>");
             }
             else
             {
@@ -251,6 +223,11 @@ namespace XXLMod3.Controller
                 MenuTab = (MenuTab == MenuTab.Manuals) ? MenuTab.Off : MenuTab.Manuals;
             }
 
+            if (GUILayout.Button("<b>POWERSLIDES</b>", GUILayout.Height(21f)))
+            {
+                MenuTab = (MenuTab == MenuTab.Powerslide) ? MenuTab.Off : MenuTab.Powerslide;
+            }
+
             if (GUILayout.Button("<b>PRIMO</b>", GUILayout.Height(21f)))
             {
                 MenuTab = (MenuTab == MenuTab.Primos) ? MenuTab.Off : MenuTab.Primos;
@@ -281,7 +258,7 @@ namespace XXLMod3.Controller
                 MenuTab = (MenuTab == MenuTab.LegCustomizer) ? MenuTab.Off : MenuTab.LegCustomizer;
             }
 
-            if (GUILayout.Button($"<b>STANCE ({Main.settings.StanceHotkey.keyCode.ToString()})</b>", GUILayout.Height(21f)))
+            if (GUILayout.Button($"<b>STANCE ({Main.settings.StanceHotkey.keyCode})</b>", GUILayout.Height(21f)))
             {
                 bool flag = !StanceUI.showMenu;
                 if (flag)
@@ -294,7 +271,7 @@ namespace XXLMod3.Controller
                 }
             }
 
-            if (GUILayout.Button($"<b>MULTIPLAYER ({Main.settings.MultiplayerHotkey.keyCode.ToString()})</b>", GUILayout.Height(21f)))
+            if (GUILayout.Button($"<b>MULTIPLAYER ({Main.settings.MultiplayerHotkey.keyCode})</b>", GUILayout.Height(21f)))
             {
                 bool flag = !MultiplayerUI.showMenu;
                 if (flag)
@@ -307,7 +284,7 @@ namespace XXLMod3.Controller
                 }
             }
 
-            if (GUILayout.Button($"<b>PRESETS ({Main.settings.PresetsHotkey.keyCode.ToString()})</b>", GUILayout.Height(21f)))
+            if (GUILayout.Button($"<b>PRESETS ({Main.settings.PresetsHotkey.keyCode})</b>", GUILayout.Height(21f)))
             {
                 bool flag = !PresetUI.showMenu;
                 if (flag)

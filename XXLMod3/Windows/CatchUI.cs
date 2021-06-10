@@ -23,6 +23,7 @@ namespace XXLMod3.Windows
                 Main.settings.CatchCorrection = !Main.settings.CatchCorrection;
             }
             Main.settings.CatchCorrectionSpeed = RGUI.SliderFloat(Main.settings.CatchCorrectionSpeed, 0f, 60f, 0f, "Catch Correction Speed");
+            Main.settings.CatchFootIkLerpSpeed = RGUI.SliderFloat(Main.settings.CatchFootIkLerpSpeed, 2f, 30f, 4f, "Catch Foot Speed");
             Main.settings.CatchMode = RGUI.Field(Main.settings.CatchMode, "Catch Mode");
             if(RGUI.Button(Main.settings.RealisticDrops, "Realistic Drops"))
             {

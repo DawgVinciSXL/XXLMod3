@@ -18,7 +18,7 @@ namespace XXLMod3.Patches.PlayerController_
                 __instance.SetSkaterToMaster();
                 Vector3 vector = (__instance.skaterController.skaterTransform.up + p_popOutDir * XXLController.Instance.GrindPopOutSidewayForce) * p_pop;
                 Vector3 vector2 = __instance.skaterController.PredictLanding(vector);
-                Vector3 vector3 = (Vector3)Extentions.InvokeMethod(__instance, "CheckDistanceAfterPop", new object[] { (vector + vector2) });
+                Vector3 vector3 = (Vector3)Utils.InvokeMethod(__instance, "CheckDistanceAfterPop", new object[] { (vector + vector2) });
                 __instance.skaterController.skaterRigidbody.AddForce((vector3 == Vector3.zero) ? vector : (vector + vector3), ForceMode.Impulse);
                 __instance.skaterController.skaterRigidbody.AddForce(vector2, ForceMode.Impulse);
                 SoundManager.Instance.PlayPopSound(p_scoop);

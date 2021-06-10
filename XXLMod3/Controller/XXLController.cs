@@ -6,6 +6,7 @@ using SkaterXL.Core;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.HighDefinition;
 using XXLMod3.Core;
 
 namespace XXLMod3.Controller
@@ -26,6 +27,7 @@ namespace XXLMod3.Controller
         public bool RightPop;
         public static CurrentState CurrentState;
         public static PhysicMaterial GrindPhysicsMaterial;
+        public static PhysicMaterial PowerslidePhysicsMaterial;
         public static PhysicMaterial PrimoPhysicsMaterial;
         public static ManualStance ManualType;
 
@@ -44,6 +46,8 @@ namespace XXLMod3.Controller
 
         private AudioSource[] DeckAudioSources;
         private AudioSource[] RagdollAudioSources;
+
+        public Collider[] BoardCollider;
 
         private bool CanSlowMo;
 
@@ -86,7 +90,10 @@ namespace XXLMod3.Controller
             };
 
             GrindPhysicsMaterial = new PhysicMaterial();
+            PowerslidePhysicsMaterial = new PhysicMaterial();
             PrimoPhysicsMaterial = new PhysicMaterial();
+
+            BoardCollider = PlayerController.Instance.boardController.boardTransform.GetComponentsInChildren<Collider>();
 
             DeckAudioSources = (Traverse.Create(DeckSounds.Instance).Field("_allSources").GetValue() as AudioSource[]);
             RagdollAudioSources = SoundManager.Instance.ragdollSounds.GetAllSources();
@@ -112,17 +119,17 @@ namespace XXLMod3.Controller
                 InputController.Instance.TriggerMultiplier = Main.settings.InAirTurnSpeed;
             }
 
-            //if (Input.GetKeyDown(KeyCode.N))
-            //{
-            //    GameObject gameObject = GameObject.CreatePrimitive(PrimitiveType.Cube);
-            //    gameObject.AddComponent<BoxCollider>();
-            //    Rigidbody rb = gameObject.AddComponent<Rigidbody>();
-            //    rb.interpolation = RigidbodyInterpolation.Interpolate;
-            //    gameObject.AddComponent<ObjectTracker>();
-            //    gameObject.GetComponent<MeshRenderer>().material.shader = Shader.Find("HDRP/Lit");
-            //    gameObject.transform.position = PlayerController.Instance.skaterController.skaterTargetTransform.position + PlayerController.Instance.skaterController.skaterTransform.forward * 3f + PlayerController.Instance.skaterController.skaterTargetTransform.up * 1f;
-            //    gameObject.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
-            //}
+            if (Input.GetKeyDown(KeyCode.N))
+            {
+                //GameObject gameObject = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                //gameObject.AddComponent<BoxCollider>();
+                //Rigidbody rb = gameObject.AddComponent<Rigidbody>();
+                //rb.interpolation = RigidbodyInterpolation.Interpolate;
+                //gameObject.AddComponent<ObjectTracker>();
+                //gameObject.GetComponent<MeshRenderer>().material.shader = Shader.Find("HDRP/Lit");
+                //gameObject.transform.position = PlayerController.Instance.skaterController.skaterTargetTransform.position + PlayerController.Instance.skaterController.skaterTransform.forward * 3f + PlayerController.Instance.skaterController.skaterTargetTransform.up * 1f;
+                //gameObject.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
+            }
 
             if (FlipDetected && Main.settings.SlowMotionFlips)
             {

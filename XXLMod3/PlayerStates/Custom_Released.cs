@@ -798,6 +798,7 @@ namespace XXLMod3.PlayerStates
             PlayerController.Instance.boardController.ResetAll();
             _flipDetected = false;
             _caught = true;
+            PlayerController.Instance.SetIKLerpSpeed(4f);
             PlayerController.Instance.SetLeftIKLerpTarget(0f, 0f);
             PlayerController.Instance.SetLeftSteezeWeight(0f);
             PlayerController.Instance.SetMaxSteezeLeft(0f);
@@ -820,6 +821,7 @@ namespace XXLMod3.PlayerStates
             PlayerController.Instance.boardController.ResetAll();
             _flipDetected = false;
             _caught = true;
+            PlayerController.Instance.SetIKLerpSpeed(4f);
             PlayerController.Instance.SetRightIKLerpTarget(0f, 0f);
             PlayerController.Instance.SetRightSteezeWeight(0f);
             PlayerController.Instance.SetMaxSteezeRight(0f);
@@ -915,6 +917,7 @@ namespace XXLMod3.PlayerStates
                     PlayerController.Instance.boardController.ResetAll();
                     _flipDetected = false;
                     _caught = true;
+                    PlayerController.Instance.SetIKLerpSpeed(4f);
                     PlayerController.Instance.SetRightIKLerpTarget(0f, 0f);
                     PlayerController.Instance.SetRightSteezeWeight(0f);
                     PlayerController.Instance.SetMaxSteezeRight(0f);
@@ -943,6 +946,7 @@ namespace XXLMod3.PlayerStates
                     PlayerController.Instance.boardController.ResetAll();
                     _flipDetected = false;
                     _caught = true;
+                    PlayerController.Instance.SetIKLerpSpeed(4f);
                     PlayerController.Instance.SetLeftIKLerpTarget(0f, 0f);
                     PlayerController.Instance.SetLeftSteezeWeight(0f);
                     PlayerController.Instance.SetMaxSteezeLeft(0f);
@@ -1255,6 +1259,10 @@ namespace XXLMod3.PlayerStates
 
         private void HandleLateflip()
         {
+            PlayerController.Instance.boardController.ReferenceBoardRotation();
+            PlayerController.Instance.FixTargetNormal();
+            PlayerController.Instance.AnimOllieTransition(true);
+
             if (_flipDetected)
             {
                 PlayerController.Instance.ResetAllAnimations();

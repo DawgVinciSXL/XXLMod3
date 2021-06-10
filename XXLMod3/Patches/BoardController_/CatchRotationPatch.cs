@@ -15,7 +15,7 @@ namespace XXLMod3.Patches.BoardController_
                 ____catchSignedAngle = Vector3.SignedAngle(from, PlayerController.Instance.skaterController.skaterTransform.up, PlayerController.Instance.skaterController.skaterTransform.right);
                 PlayerController.Instance.AnimSetCatchAngle(____catchSignedAngle);
                 ___catchRotation.rotation = Quaternion.Slerp(__instance.boardTransform.rotation, ____catchForwardRotation.rotation, Time.fixedDeltaTime * Main.settings.CatchCorrectionSpeed);
-                Core.Extentions.InvokeMethod(__instance, "PIDRotation", new object[] { ___catchRotation.rotation });
+                Core.Utils.InvokeMethod(__instance, "PIDRotation", new object[] { ___catchRotation.rotation });
                 return false;
             }
             return true;

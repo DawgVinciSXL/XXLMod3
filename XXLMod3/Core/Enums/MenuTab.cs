@@ -13,6 +13,7 @@
         Footplants,
         Grinds,
         Manuals,
+        Powerslide,
         Primos,
         Misc,
         Bail,

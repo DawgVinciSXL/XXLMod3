@@ -46,5 +46,10 @@ namespace XXLMod3
                             where file.Contains(".xml")
                             select file).ToArray();
         }
+
+        public static void DeletePreset(string filePath)
+        {
+            File.Delete(filePath);
+        }
     }
 }

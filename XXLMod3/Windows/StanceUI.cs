@@ -12,7 +12,6 @@ namespace XXLMod3.Windows
     public static class StanceUI
     {
         private static string presetName = "Enter name...";
-        public static string presetPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\SkaterXL\\XXLMod3\\StancePresets\\";
 
         public static bool showMenu;
         public static Rect Rect = new Rect(200f, Screen.currentResolution.height / 2 - 370.5f, 100f, 200f);

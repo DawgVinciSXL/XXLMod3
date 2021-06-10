@@ -45,14 +45,6 @@ namespace XXLMod3.Windows
             GUILayout.EndVertical();
 
             GUILayout.BeginVertical("Box");
-            GUILayout.Box("<b>XLAnimationModifier By Tave</b>", GUILayout.Height(21f));
-            if (RGUI.Button(Main.settings.FixedRevertAnimation, "Cancel Revert Animation"))
-            {
-                Main.settings.FixedRevertAnimation = !Main.settings.FixedRevertAnimation;
-            }
-            GUILayout.EndVertical();
-
-            GUILayout.BeginVertical("Box");
             if (RGUI.Button(Main.settings.FlipsAfterPop, "Flips After Pop"))
             {
                 Main.settings.FlipsAfterPop = !Main.settings.FlipsAfterPop;
@@ -71,10 +63,6 @@ namespace XXLMod3.Windows
             {
                 Main.settings.LockTurningWhileWindUp = !Main.settings.LockTurningWhileWindUp;
             }
-            GUILayout.EndVertical();
-
-            GUILayout.BeginVertical("Box");
-            Main.settings.PowerslideCrouchAmount = RGUI.SliderFloat(Main.settings.PowerslideCrouchAmount, 0.3f, 1f, 0.94196f, "Powerslide Crouch Amount");
             GUILayout.EndVertical();
 
             GUILayout.BeginVertical("Box");

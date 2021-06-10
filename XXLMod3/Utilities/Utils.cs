@@ -1,12 +1,10 @@
-﻿using GameManagement;
-using System;
+﻿using System;
 using System.Linq;
 using System.Reflection;
-using UnityEngine;
 
 namespace XXLMod3.Core
 {
-    public static class Extentions
+    public static class Utils
     {
         public static object InvokeMethod(object obj, string methodName, params object[] methodParams)
         {

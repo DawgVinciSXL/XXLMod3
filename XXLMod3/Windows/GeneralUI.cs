@@ -75,10 +75,6 @@ namespace XXLMod3.Windows
             GUILayout.EndVertical();
 
             GUILayout.BeginVertical("Box");
-            Main.settings.RevertSpeed = RGUI.SliderFloat(Main.settings.RevertSpeed, 0.3f, 2f, 1f, "Revert Speed");
-            GUILayout.EndVertical();
-
-            GUILayout.BeginVertical("Box");
             Main.settings.TopSpeed = RGUI.SliderFloat(Main.settings.TopSpeed, 0.1f, 16f, 8f, "Top Speed");
             GUILayout.EndVertical();
 

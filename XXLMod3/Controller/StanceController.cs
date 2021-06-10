@@ -135,8 +135,6 @@ namespace XXLMod3.Controller
 
         List<CustomFeetObject> CustomFeetObjects = new List<CustomFeetObject>();
 
-        public string presetName = "ENTER PRESET NAME...";
-
         public static bool IsInEditMode;
         public static bool IsMongoPushing;
         public static bool IsRevertTriggered;
